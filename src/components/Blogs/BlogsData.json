@@ -1,0 +1,44 @@
+[
+  {
+    "id": "dsa-cheatsheet",
+    "title": "DSA Pattern Cheat Sheet",
+    "description": "Short blurb about the post.",
+    "image": "/public/dsa.png",
+    "path": "./DataStructures/DsaCheatSheet"
+  },
+  {
+    "id": "CN-part-1",
+    "title": "Computer Networks Part - 1",
+    "description": "Short blurb about the post.",
+    "image": "/public/CN1.png",
+    "path": "./ComputerNetworks/Part1.jsx"
+  },
+  {
+    "id": "CN-part-2",
+    "title": "Computer Networks Part - 2",
+    "description": "Short blurb about the post.",
+    "image": "/public/CN2.png",
+    "path": "./ComputerNetworks/Part2.jsx"
+  },
+  {
+    "id": "CN-part-3",
+    "title": "Computer Networks Part - 3",
+    "description": "Short blurb about the post.",
+    "image": "/public/CN3.png",
+    "path": "./ComputerNetworks/Part3.jsx"
+  },
+  {
+    "id": "CN-part-4",
+    "title": "Computer Networks Part - 4",
+    "description": "Short blurb about the post.",
+    "image": "/public/CN4.png",
+    "path": "./ComputerNetworks/Part4.jsx"
+  },
+  {
+    "id": "CN-part-5",
+    "title": "Computer Networks Part - 5",
+    "description": "Short blurb about the post.",
+    "image": "/public/CN5.png",
+    "path": "./ComputerNetworks/Part5.jsx"
+  }
+]
