@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/UI/Navbar"; // ✅ ADD THIS IMPORT
+import NavBar from "./components/UI/NavBar"; // ✅ ADD THIS IMPORT
 import Home from "./components/UI/Home";
 import About from "./components/UI/About";
 import Contact from "./components/UI/Contact";
@@ -11,7 +11,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      <Navbar /> {/* ✅ ADD THIS - Place it here, BEFORE Routes */}
+      <NavBar /> {/* ✅ ADD THIS - Place it here, BEFORE Routes */}
       
       <Routes>
         {/* Home */}
