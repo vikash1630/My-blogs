@@ -9,7 +9,7 @@ function Blogs() {
   const location = useLocation()
 
   useEffect(() => {
-    setBlogs(blogsData)
+    setBlogs(BlogsData)
   }, [])
 
   useEffect(() => {
