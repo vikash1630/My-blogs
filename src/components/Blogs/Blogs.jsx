@@ -1,25 +1,43 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react'
-import { useLocation } from 'react-router-dom'
-import Footer from '../UI/Footer'
-import BlogsData from './BlogsData.json'
+import React, { useEffect, useState, Suspense, lazy } from "react";
+import { useLocation } from "react-router-dom";
+import Footer from "../UI/Footer";
+import BlogsData from "./BlogsData.json";
+import DsaCheatSheet from "./DataStructures/DsaCheatSheet";
+import Part1 from "./ComputerNetworks/Part1";
+import Part2 from "./ComputerNetworks/Part2";
+import Part3 from "./ComputerNetworks/Part3";
+import Part4 from "./ComputerNetworks/Part4";
+import Part5 from "./ComputerNetworks/Part5";
+// Add Blog url
 
 function Blogs() {
-  const [blogs, setBlogs] = useState([])
-  const [ActiveComponent, setActiveComponent] = useState(null)
-  const location = useLocation()
+  const [blogs, setBlogs] = useState([]);
+  const [ActiveComponent, setActiveComponent] = useState(null);
+  const location = useLocation();
+
+  const BLOG_COMPONENTS = {
+    "dsa-cheatsheet": DsaCheatSheet,
+    "CN-part-1": Part1,
+    "CN-part-2": Part2,
+    "CN-part-3": Part3,
+    "CN-part-4": Part4,
+    "CN-part-5": Part5,
+    // Connect here
+  };
 
   useEffect(() => {
-    setBlogs(BlogsData)
-  }, [])
+    setBlogs(BlogsData);
+  }, []);
 
   useEffect(() => {
-    setActiveComponent(null)
-  }, [location.key])
+    setActiveComponent(null);
+  }, [location.key]);
 
-  const handleView = (path) => {
-    const Comp = lazy(() => import(/* @vite-ignore */ `${path}`))
-    setActiveComponent(() => Comp)
-  }
+
+  const handleView = (id) => {
+    const Component = BLOG_COMPONENTS[id];
+    setActiveComponent(() => Component);
+  };
 
   if (ActiveComponent) {
     return (
@@ -31,13 +49,17 @@ function Blogs() {
           >
             ← Back to Blogs
           </button>
-          <Suspense fallback={<p className="text-gray-600 dark:text-gray-300">Loading...</p>}>
+          <Suspense
+            fallback={
+              <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+            }
+          >
             <ActiveComponent />
           </Suspense>
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -49,10 +71,10 @@ function Blogs() {
           {blogs.map((blog) => (
             <div
               key={blog.id}
-              onClick={() => handleView(blog.path)}
+              onClick={() => handleView(blog.id)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleView(blog.path)}
+              onKeyDown={(e) => e.key === 'Enter' && handleView(blog.id)}
               className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-gray-900/40 overflow-hidden transition-all duration-300 hover:scale-[1.02] cursor-pointer"
             >
               <div className="w-full aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -78,7 +100,7 @@ function Blogs() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Blogs
+export default Blogs;
