@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "./Navbar";
+import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 function About() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
-      {/* <Navbar /> */}
+      {/* <NavBar /> */}
 
       <div className="w-full px-4 sm:px-6 lg:px-10 py-16">
         <div className="mx-auto max-w-3xl flex flex-col gap-10">
