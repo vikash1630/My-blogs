@@ -1,8 +1,7 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { useLocation } from 'react-router-dom'
-import Navbar from '../UI/Navbar'
 import Footer from '../UI/Footer'
-import blogsData from './BlogsData.json'
+import BlogsData from './BlogsData.json'
 
 function Blogs() {
   const [blogs, setBlogs] = useState([])

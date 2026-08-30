@@ -551,7 +551,7 @@ function RevealSection({ children, className = "" }) {
   );
 }
 
-const DSAPatternCheatSheet = ({ pdfUrl = "/DSA_Pattern_Recognition_Cheat_Sheet.pdf" }) => {
+const DsaCheatSheet = ({ pdfUrl = "/DSA_Pattern_Recognition_Cheat_Sheet.pdf" }) => {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-gray-950 transition-colors duration-500">
       {/* Page header — theme handled by site Navbar, not here */}
@@ -695,4 +695,4 @@ const DSAPatternCheatSheet = ({ pdfUrl = "/DSA_Pattern_Recognition_Cheat_Sheet.p
   );
 };
 
-export default DSAPatternCheatSheet;
+export default DsaCheatSheet;
