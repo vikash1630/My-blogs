@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'   // added for back-to-blogs button
+import Footer from '../../UI/Footer'
 
 /* ---------- category system (encodes OSI-layer grouping, not decoration) ---------- */
 
@@ -241,6 +243,8 @@ function RevisionPanel({ title, className = '', children }) {
 
 function Part1() {
   const [progress, setProgress] = useState(0)
+  const [showTopArrow, setShowTopArrow] = useState(false)
+  const [showBottomArrow, setShowBottomArrow] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
@@ -248,22 +252,72 @@ function Part1() {
       const scrollTop = h.scrollTop || document.body.scrollTop
       const scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight
       setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0)
+
+      // Show top arrow after scrolling down 200px
+      setShowTopArrow(scrollTop > 200)
+      // Show bottom arrow when we're near bottom (but not at very top)
+      setShowBottomArrow(scrollTop > 200 && scrollTop < scrollHeight - 200)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <div className="w-full bg-white dark:bg-gray-950">
       {/* scroll progress — the signal moving through the wire */}
       <div className="fixed top-0 left-0 h-[3px] bg-amber-500 z-50 print:hidden" style={{ width: `${progress}%` }} />
+
+      {/* floating scroll arrows */}
+      {showTopArrow && (
+        <button
+          onClick={scrollToBottom}
+          className="fixed top-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl hover:bg-blue-500 transition-all"
+          title="Go to bottom"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <path d="M12 5v14" />
+            <path d="m19 12-7 7-7-7" />
+          </svg>
+        </button>
+      )}
+
+      {showBottomArrow && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl hover:bg-blue-500 transition-all"
+          title="Go to top"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <path d="M12 19V5" />
+            <path d="m5 12 7-7 7 7" />
+          </svg>
+        </button>
+      )}
 
       {/* Header */}
       <div className="w-full border-b border-gray-100 dark:border-white/10">
         <div className="mx-auto max-w-2xl px-5 sm:px-8 py-12 sm:py-16">
           <div className="flex items-start justify-between gap-4 sm:gap-8">
             <div className="min-w-0">
+              {/* Back to Blogs button – top left, high visibility */}
+              <Link
+                to="/blogs"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-mono text-sm font-bold px-5 py-2.5 shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all mb-4"
+              >
+                <span className="text-base">←</span>
+                <span className="hidden sm:inline">Back to Blogs</span>
+                <span className="sm:hidden">Blogs</span>
+              </Link>
+
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3">
                 🌐 Computer Networks · Field Notes
               </p>
@@ -912,8 +966,12 @@ function Part1() {
           body { background: #fff !important; }
         }
       `}</style>
+    
+    <Footer />
     </div>
-  )
+
+)
+
 }
 
 export default Part1

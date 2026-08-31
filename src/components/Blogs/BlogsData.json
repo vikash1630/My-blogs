@@ -1,44 +1,44 @@
 [
   {
+    "id": "React",
+    "title": "React Working Flow: From Components to UI",
+    "description": "Understand how React works from start to finish — components, JSX, props, state, events, rendering, the Virtual DOM, re-renders, hooks, and how React updates the browser UI.",
+    "image": "/React1.png"
+  },
+  {
     "id": "dsa-cheatsheet",
-    "title": "DSA Pattern Cheat Sheet",
-    "description": "Short blurb about the post.",
-    "image": "/dsa.png",
-    "path": "./DataStructures/DsaCheatSheet"
+    "title": "DSA Pattern Recognition Cheat Sheet",
+    "description": "A quick-reference guide covering 25 recurring DSA patterns, their trigger clues, and recognition techniques to help you identify the right pattern before writing code.",
+    "image": "/dsa.png"
   },
   {
     "id": "CN-part-1",
-    "title": "Computer Networks Part - 1",
-    "description": "Short blurb about the post.",
-    "image": "/CN1.png",
-    "path": "./ComputerNetworks/Part1.jsx"
+    "title": "Computer Networks Part 1: From Bits to NAT",
+    "description": "Build a strong mental model of networking from layers, bits, signals, and NICs to frames, MAC addresses, switches, IP addressing, routers, ARP, IPv4, private/public IPs, and NAT.",
+    "image": "/CN1.png"
   },
   {
     "id": "CN-part-2",
-    "title": "Computer Networks Part - 2",
-    "description": "Short blurb about the post.",
-    "image": "/CN2.png",
-    "path": "./ComputerNetworks/Part2.jsx"
+    "title": "Computer Networks Part 2: Transport Layer, Ports & Sockets",
+    "description": "Understand how networking moves from host-to-host delivery to application-level communication through ports, TCP and UDP, ephemeral ports, 4-tuples, sockets, listening connections, and NAT port mapping.",
+    "image": "/CN2.png"
   },
   {
     "id": "CN-part-3",
-    "title": "Computer Networks Part - 3",
-    "description": "Short blurb about the post.",
-    "image": "/CN3.png",
-    "path": "./ComputerNetworks/Part3.jsx"
+    "title": "Computer Networks Part 3: TCP Reliability & Congestion Control",
+    "description": "Dive into TCP internals including the 3-way handshake, sequence numbers, ACKs, retransmission, out-of-order data, sliding windows, flow control, congestion control, Slow Start, connection termination, FIN, RST, and TIME_WAIT.",
+    "image": "/CN3.png"
   },
   {
     "id": "CN-part-4",
-    "title": "Computer Networks Part - 4",
-    "description": "Short blurb about the post.",
-    "image": "/CN4.png",
-    "path": "./ComputerNetworks/Part4.jsx"
+    "title": "Computer Networks Part 4: DNS, HTTP, HTTPS & CDN",
+    "description": "Understand how applications communicate over the network through DNS resolution, HTTP requests and responses, HTTPS with TLS and certificates, HTTP caching, and CDNs that deliver content closer to users.",
+    "image": "/CN4.png"
   },
   {
     "id": "CN-part-5",
-    "title": "Computer Networks Part - 5",
-    "description": "Short blurb about the post.",
-    "image": "/CN5.png",
-    "path": "./ComputerNetworks/Part5.jsx"
+    "title": "Computer Networks Part 5: Proxies, Architecture & Network Security",
+    "description": "Complete the SDE-1 networking picture with CDNs, forward and reverse proxies, load balancers, VPNs, API gateways, 3-tier architecture, monoliths vs microservices, CORS, network security, common attacks, MTU, PMTUD, and end-to-end request flows.",
+    "image": "/CN5.png"
   }
 ]

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Zap, Timer, Download } from "lucide-react";
+import Footer from '../../UI/Footer';
 
 const PATTERNS = [
   {
@@ -552,12 +554,79 @@ function RevealSection({ children, className = "" }) {
 }
 
 const DsaCheatSheet = ({ pdfUrl = "/DSA_Pattern_Recognition_Cheat_Sheet.pdf" }) => {
+  const [progress, setProgress] = useState(0);
+  const [showTopArrow, setShowTopArrow] = useState(false);
+  const [showBottomArrow, setShowBottomArrow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const scrollTop = h.scrollTop || document.body.scrollTop;
+      const scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+      setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+
+      setShowTopArrow(scrollTop > 200);
+      setShowBottomArrow(scrollTop > 200 && scrollTop < scrollHeight - 200);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen w-full bg-white dark:bg-gray-950 transition-colors duration-500">
+      {/* scroll progress — the signal moving through the wire */}
+      <div className="fixed top-0 left-0 h-[3px] bg-blue-500 z-50 print:hidden" style={{ width: `${progress}%` }} />
+
+      {/* floating scroll arrows */}
+      {showTopArrow && (
+        <button
+          onClick={scrollToBottom}
+          className="fixed top-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl hover:bg-blue-500 transition-all"
+          title="Go to bottom"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <path d="M12 5v14" />
+            <path d="m19 12-7 7-7-7" />
+          </svg>
+        </button>
+      )}
+
+      {showBottomArrow && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl hover:bg-blue-500 transition-all"
+          title="Go to top"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <path d="M12 19V5" />
+            <path d="m5 12 7-7 7 7" />
+          </svg>
+        </button>
+      )}
+
       {/* Page header — theme handled by site Navbar, not here */}
       <div className="w-full border-b border-gray-100 dark:border-white/10">
         <div className="mx-auto max-w-3xl px-5 sm:px-8 py-10 sm:py-14 flex items-start justify-between gap-6">
           <div>
+            {/* Back to Blogs button – top left, high visibility */}
+            <Link
+              to="/blogs"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-mono text-sm font-bold px-5 py-2.5 shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all mb-6"
+            >
+              <span className="text-base">←</span>
+              <span className="hidden sm:inline">Back to Blogs</span>
+              <span className="sm:hidden">Blogs</span>
+            </Link>
+
             <p className="text-sm font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
               🧠 Interview prep
             </p>
@@ -691,6 +760,9 @@ const DsaCheatSheet = ({ pdfUrl = "/DSA_Pattern_Recognition_Cheat_Sheet.pdf" }) 
           </p>
         </RevealSection>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
