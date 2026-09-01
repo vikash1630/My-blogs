@@ -17,6 +17,7 @@ import Part5 from "./components/Blogs/ComputerNetworks/Part5";
 
 import "./App.css";
 import React1 from "./components/Blogs/React/React1";
+import SystemDesign1 from "./components/Blogs/SystemDesign/SystemDesign1";
 
 function App() {
   return (
@@ -28,14 +29,21 @@ function App() {
 
         <Route path="/blogs" element={<Blogs />} />
 
+        {/* Dsa */}
         <Route path="/blogs/dsa-cheatsheet" element={<DsaCheatSheet />} />
+
+        {/* Computer Networks */}
         <Route path="/blogs/CN-part-1" element={<Part1 />} />
         <Route path="/blogs/CN-part-2" element={<Part2 />} />
         <Route path="/blogs/CN-part-3" element={<Part3 />} />
         <Route path="/blogs/CN-part-4" element={<Part4 />} />
         <Route path="/blogs/CN-part-5" element={<Part5 />} />
 
+        {/* React */}
         <Route path="/blogs/React" element={<React1 />} />
+
+        {/* System Design */}
+        <Route path="/blogs/SystemDesign-part-1" element={<SystemDesign1 />} />
 
 
         <Route path="/about" element={<About />} />

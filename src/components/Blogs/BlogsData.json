@@ -40,5 +40,11 @@
     "title": "Computer Networks Part 5: Proxies, Architecture & Network Security",
     "description": "Complete the SDE-1 networking picture with CDNs, forward and reverse proxies, load balancers, VPNs, API gateways, 3-tier architecture, monoliths vs microservices, CORS, network security, common attacks, MTU, PMTUD, and end-to-end request flows.",
     "image": "/CN5.png"
+  },
+  {
+    "id": "SystemDesign-part-1",
+    "title": "System Design Fundamentals & Networking",
+    "description": "Learn core system design concepts including scalability, availability, reliability, performance, fault tolerance, and trade-offs. Understand DNS, TCP/UDP, HTTP/HTTPS, TLS, REST, authentication, sessions, JWT, load balancers, and databases. Practice client-server architecture, request flows, bottleneck identification, and scaling real-world systems.",
+    "image": "/SD1.png"
   }
 ]
