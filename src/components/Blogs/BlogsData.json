@@ -6,6 +6,12 @@
     "image": "/React1.png"
   },
   {
+    "id": "OOPS",
+    "title": "Object Oriented Programming",
+    "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
+    "image": "/OOP1.png"
+  },
+  {
     "id": "dsa-cheatsheet",
     "title": "DSA Pattern Recognition Cheat Sheet",
     "description": "A quick-reference guide covering 25 recurring DSA patterns, their trigger clues, and recognition techniques to help you identify the right pattern before writing code.",

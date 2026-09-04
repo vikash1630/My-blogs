@@ -414,196 +414,6 @@ Inheritance or Composition?`,
   }
 ];
 
-// Day 4: UML + Visual Design concepts
-const DAY4_CONCEPTS = [
-  {
-    id: 22,
-    section: "Day 4",
-    name: "UML Purpose",
-    hue: "indigo",
-    icon: "🎨",
-    description: "UML = Unified Modeling Language. A visual language for communicating software design.",
-    content: `UML is NOT memorization; it's showing your thinking.
-
-It answers 5 core questions:
-1. WHO wants WHAT? → Use Case
-2. WHAT exists? → Class
-3. WHO talks to WHOM? → Sequence
-4. HOW does object change? → State
-5. HOW does process flow? → Activity`,
-    diagram: "Requirement → Use Case → Class → Sequence → State → Activity",
-    keypoint: "UML visualizes the object design you already learned."
-  },
-  {
-    id: 23,
-    section: "Day 4",
-    name: "Use Case Diagram",
-    hue: "blue",
-    icon: "👤",
-    description: "WHO interacts with the system and WHAT do they want to accomplish?",
-    content: `Actor: external entity (Student, Admin, Payment Gateway).
-Use Case: goal/action (Search Book, Borrow Book, Return Book).
-
-Example:
-      Student
-         │
-    ┌────┼────┐
-    ↓    ↓    ↓
- Search Borrow Return
-  Book   Book   Book`,
-    diagram: "Actor ─── Use Case (oval)",
-    keypoint: "Use Case = WHO wants WHAT."
-  },
-  {
-    id: 24,
-    section: "Day 4",
-    name: "Class Diagram",
-    hue: "cyan",
-    icon: "🧱",
-    description: "WHAT exists? Classes, their attributes, methods, and relationships.",
-    content: `Class box: top (name), middle (attributes), bottom (methods).
-
-Visibility:
-+ public
-- private
-# protected
-
-Example:
-┌──────────────────┐
-│      User        │
-├──────────────────┤
-│ - userId : int   │
-│ - name : string  │
-├──────────────────┤
-│ + borrowBook()   │
-│ + returnBook()   │
-└──────────────────┘`,
-    diagram: "Class = structure (attributes + methods)",
-    keypoint: "Class diagram shows static structure."
-  },
-  {
-    id: 25,
-    section: "Day 4",
-    name: "Relationships & Multiplicity",
-    hue: "teal",
-    icon: "🔗",
-    description: "How classes relate and how many instances participate.",
-    content: `Association → related to
-Aggregation → HAS-A (independent lifecycle)  ◇
-Composition → OWNS-A (tied lifecycle)       ◆
-Dependency → temporarily uses               - - - >
-Inheritance → IS-A                          ▲
-
-Multiplicity:
-1      exactly one
-0..1   zero or one
-*      many
-0..*   zero or many
-1..*   one or more
-
-Example: Customer 1 ───── 0..* Order`,
-    diagram: "Association ─, Aggregation ◇, Composition ◆, Dependency - - >, Inheritance ▲",
-    keypoint: "Relationships define connections; multiplicity defines quantity."
-  },
-  {
-    id: 26,
-    section: "Day 4",
-    name: "Sequence Diagram",
-    hue: "emerald",
-    icon: "⏳",
-    description: "WHO talks to WHOM and in what order over time.",
-    content: `Participants are lifelines; messages are arrows from one lifeline to another.
-
-Example – Borrow Book:
-Student        Library        Book
-   │              │             │
-   │ borrowBook() │             │
-   ├─────────────>│             │
-   │              │ checkAvail. │
-   │              ├────────────>│
-   │              │ availability│
-   │              │<────────────┤
-   │              │ updateStatus│
-   │              ├────────────>│
-   │ success      │             │
-   │<─────────────┤             │`,
-    diagram: "Actor → Object1 → Object2",
-    keypoint: "Sequence = interaction over time."
-  },
-  {
-    id: 27,
-    section: "Day 4",
-    name: "State Diagram",
-    hue: "lime",
-    icon: "🔄",
-    description: "HOW does a single object change throughout its lifecycle?",
-    content: `States (rounded rectangles), transitions (arrows) labeled with events.
-
-Example – Book:
-┌───────────┐
-│ Available │
-└─────┬─────┘
-      │ borrow
-      ↓
-┌───────────┐
-│ Borrowed  │
-└─────┬─────┘
-      │ return
-      ↓
-┌───────────┐
-│ Available │
-└───────────┘`,
-    diagram: "State1 --event--> State2",
-    keypoint: "State = object lifecycle."
-  },
-  {
-    id: 28,
-    section: "Day 4",
-    name: "Activity Diagram",
-    hue: "orange",
-    icon: "⚙️",
-    description: "HOW does the workflow/process proceed?",
-    content: `Actions (rounded rectangles), decisions (diamonds), start/end nodes.
-
-Example – Borrow Book:
-START
-  ↓
-Search for Book
-  ↓
-Is Available?
-  /        \
-YES         NO
-  ↓          ↓
-Borrow    Show Error
-  ↓          ↓
-Update      END
-Status
-  ↓
-END`,
-    diagram: "Start → Action → Decision → ... → End",
-    keypoint: "Activity = process flow."
-  },
-  {
-    id: 29,
-    section: "Day 4",
-    name: "UML Diagram Choice",
-    hue: "purple",
-    icon: "🧠",
-    description: "When to use each diagram? Ask the right question.",
-    content: `WHO wants WHAT?         → Use Case
-WHAT exists?            → Class
-WHO talks to WHOM?      → Sequence
-HOW does object change? → State
-HOW does process flow?  → Activity
-
-Remember:
-UML is not memorization.
-UML is a way to SHOW your thinking.`,
-    diagram: "Question → Diagram",
-    keypoint: "Ask the right question to pick the right diagram."
-  }
-];
-
 const HUE_MAP = {
   blue: { border: "border-blue-200 dark:border-blue-500/25", bg: "bg-blue-50/70 dark:bg-blue-500/[0.06]", text: "text-blue-600 dark:text-blue-300", badge: "bg-blue-500", accent: "text-blue-500 dark:text-blue-400" },
   cyan: { border: "border-cyan-200 dark:border-cyan-500/25", bg: "bg-cyan-50/70 dark:bg-cyan-500/[0.06]", text: "text-cyan-600 dark:text-cyan-300", badge: "bg-cyan-500", accent: "text-cyan-500 dark:text-cyan-400" },
@@ -717,7 +527,7 @@ function RevealSection({ children, className = "" }) {
   );
 }
 
-const SystemDesign2_OOPS = () => {
+const OOP1 = () => {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -744,6 +554,8 @@ const SystemDesign2_OOPS = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const concepts = CONCEPTS; // all are Day 3
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-gray-950 transition-colors duration-500">
@@ -791,16 +603,16 @@ const SystemDesign2_OOPS = () => {
             </Link>
 
             <p className="text-sm font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
-              🧠 Object Oriented Programming + UML
+              🧠 Object Oriented Programming
             </p>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-              OOP + Object Thinking + UML
+              OOP + Object Thinking
             </h1>
             <p className="mt-3 text-lg sm:text-xl text-gray-500 dark:text-gray-400">
-              Day 3 &amp; 4 — LLD Master Revision Sheets
+              Day 3 — LLD Master Revision Sheet
             </p>
           </div>
-          {/* Optional download */}
+          {/* Optional download if you have a PDF; we can skip or keep generic */}
           <a
             href="#"
             className="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-5 py-3 text-sm sm:text-base font-bold text-white dark:text-gray-900 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
@@ -825,25 +637,13 @@ const SystemDesign2_OOPS = () => {
           </p>
         </RevealSection>
 
-        {/* Day 3 concepts */}
+        {/* All concepts */}
         <RevealSection className="mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-10">
             Day 3: OOP + Object Thinking
           </h2>
           <div className="flex flex-col gap-10">
-            {CONCEPTS.map((concept) => (
-              <ConceptCard key={concept.id} concept={concept} />
-            ))}
-          </div>
-        </RevealSection>
-
-        {/* Day 4 concepts */}
-        <RevealSection className="mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-10">
-            Day 4: UML + Visual Design
-          </h2>
-          <div className="flex flex-col gap-10">
-            {DAY4_CONCEPTS.map((concept) => (
+            {concepts.map((concept) => (
               <ConceptCard key={concept.id} concept={concept} />
             ))}
           </div>
@@ -891,4 +691,4 @@ const SystemDesign2_OOPS = () => {
   );
 };
 
-export default SystemDesign2_OOPS;
+export default OOP1;
