@@ -46,5 +46,11 @@
     "title": "System Design Fundamentals & Networking",
     "description": "Learn core system design concepts including scalability, availability, reliability, performance, fault tolerance, and trade-offs. Understand DNS, TCP/UDP, HTTP/HTTPS, TLS, REST, authentication, sessions, JWT, load balancers, and databases. Practice client-server architecture, request flows, bottleneck identification, and scaling real-world systems.",
     "image": "/SD1.png"
+  },
+  {
+    "id": "SystemDesign-part-2-OOPS",
+    "title": "System Design - 2 (OOPS)",
+    "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
+    "image": "/SD2.jpg"
   }
 ]

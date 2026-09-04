@@ -18,6 +18,8 @@ import Part5 from "./components/Blogs/ComputerNetworks/Part5";
 import "./App.css";
 import React1 from "./components/Blogs/React/React1";
 import SystemDesign1 from "./components/Blogs/SystemDesign/SystemDesign1";
+import SystemDesign2_OOPS from "./components/Blogs/SystemDesign/SystemDesign2_OOPS";
+
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
 
         {/* System Design */}
         <Route path="/blogs/SystemDesign-part-1" element={<SystemDesign1 />} />
+        <Route path="/blogs/SystemDesign-part-2-OOPS" element={<SystemDesign2_OOPS />} />
 
 
         <Route path="/about" element={<About />} />
