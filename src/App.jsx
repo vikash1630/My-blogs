@@ -21,11 +21,12 @@ import SystemDesign1 from "./components/Blogs/SystemDesign/SystemDesign1";
 import SystemDesign2_OOPS from "./components/Blogs/SystemDesign/SystemDesign2_OOPS";
 import OOP1 from "./components/Blogs/ObjectOrientedProgramming/OOP1";
 import SystemDesign3 from "./components/Blogs/SystemDesign/SystemDesign3";
-
+import ScrollToTop from "./components/UI/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <NavBar />
 
       <Routes>
@@ -51,9 +52,11 @@ function App() {
 
         {/* System Design */}
         <Route path="/blogs/SystemDesign-part-1" element={<SystemDesign1 />} />
-        <Route path="/blogs/SystemDesign-part-2-OOPS" element={<SystemDesign2_OOPS />} />
+        <Route
+          path="/blogs/SystemDesign-part-2-OOPS"
+          element={<SystemDesign2_OOPS />}
+        />
         <Route path="/blogs/SystemDesign-part-3" element={<SystemDesign3 />} />
-
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -70,9 +73,7 @@ const NotFound = () => {
       <div className="text-center">
         <h1 className="text-6xl font-bold">404</h1>
 
-        <p className="mt-4 text-xl text-gray-600">
-          Page Not Found
-        </p>
+        <p className="mt-4 text-xl text-gray-600">Page Not Found</p>
 
         <a
           href="/"
