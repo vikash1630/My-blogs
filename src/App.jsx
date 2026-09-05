@@ -20,6 +20,7 @@ import React1 from "./components/Blogs/React/React1";
 import SystemDesign1 from "./components/Blogs/SystemDesign/SystemDesign1";
 import SystemDesign2_OOPS from "./components/Blogs/SystemDesign/SystemDesign2_OOPS";
 import OOP1 from "./components/Blogs/ObjectOrientedProgramming/OOP1";
+import SystemDesign3 from "./components/Blogs/SystemDesign/SystemDesign3";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         {/* System Design */}
         <Route path="/blogs/SystemDesign-part-1" element={<SystemDesign1 />} />
         <Route path="/blogs/SystemDesign-part-2-OOPS" element={<SystemDesign2_OOPS />} />
+        <Route path="/blogs/SystemDesign-part-3" element={<SystemDesign3 />} />
 
 
         <Route path="/about" element={<About />} />

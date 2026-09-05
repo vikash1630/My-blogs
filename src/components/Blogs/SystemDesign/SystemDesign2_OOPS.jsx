@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
-import Footer from '../../UI/Footer';
+import Footer from "../../UI/Footer";
 
 const CONCEPTS = [
   {
@@ -10,7 +10,8 @@ const CONCEPTS = [
     name: "Why OOP for LLD?",
     hue: "indigo",
     icon: "🧠",
-    description: "OOP ≠ syntax. It's turning requirements into interacting objects with clear state + behavior + responsibilities.",
+    description:
+      "OOP ≠ syntax. It's turning requirements into interacting objects with clear state + behavior + responsibilities.",
     content: `Requirement
     ↓
 What THINGS exist?
@@ -28,8 +29,9 @@ RESPONSIBILITIES
 How do objects RELATE?
     ↓
 Design`,
-    diagram: "Requirement → Objects → State/Behavior → Responsibilities → Relationships",
-    keypoint: "OOP for LLD is about responsibility-driven design."
+    diagram:
+      "Requirement → Objects → State/Behavior → Responsibilities → Relationships",
+    keypoint: "OOP for LLD is about responsibility-driven design.",
   },
   {
     id: 2,
@@ -48,7 +50,7 @@ public:
 Car car1;   // object
 Car car2;   // object`,
     diagram: "CLASS (Car) → car1, car2 (objects)",
-    keypoint: "Classes define structure; objects hold state."
+    keypoint: "Classes define structure; objects hold state.",
   },
   {
     id: 3,
@@ -56,7 +58,8 @@ Car car2;   // object`,
     name: "Object → Responsibility",
     hue: "cyan",
     icon: "🎯",
-    description: "The most important LLD skill: assign responsibilities based on what the object knows and does.",
+    description:
+      "The most important LLD skill: assign responsibilities based on what the object knows and does.",
     content: `OBJECT
   ↓
 KNOWS (state) + DOES (actions) + RULES (validity)
@@ -68,7 +71,8 @@ KNOWS: orderId, customerId, items, status
 DOES: changeStatus, cancel, complete
 RESPONSIBLE FOR: maintaining valid order lifecycle`,
     diagram: "KNOWS → DOES → RULES → RESPONSIBILITY",
-    keypoint: "Who naturally has the information to perform the responsibility?"
+    keypoint:
+      "Who naturally has the information to perform the responsibility?",
   },
   {
     id: 4,
@@ -88,7 +92,7 @@ public:
     double getBalance() const { return balance; }
 };`,
     diagram: "Object owns state → controls access → enforces rules",
-    keypoint: "Protect the inside; control how it changes."
+    keypoint: "Protect the inside; control how it changes.",
   },
   {
     id: 5,
@@ -96,7 +100,8 @@ public:
     name: "Abstraction",
     hue: "emerald",
     icon: "🧠",
-    description: "Hide unnecessary complexity; expose only what the outside needs.",
+    description:
+      "Hide unnecessary complexity; expose only what the outside needs.",
     content: `C++:
 class Payment {
 public:
@@ -109,7 +114,7 @@ private:
     void sendReceipt() { /* ... */ }
 };`,
     diagram: "Complex implementation hidden → expose essential behavior",
-    keypoint: "Abstraction = what to show; encapsulation = how to protect."
+    keypoint: "Abstraction = what to show; encapsulation = how to protect.",
   },
   {
     id: 6,
@@ -117,7 +122,8 @@ private:
     name: "Inheritance",
     hue: "lime",
     icon: "🌳",
-    description: "Specialized class extends a general class (IS-A relationship).",
+    description:
+      "Specialized class extends a general class (IS-A relationship).",
     content: `C++:
 class Vehicle {
 public:
@@ -128,7 +134,7 @@ public:
     void openTrunk() { cout << "Trunk opened"; }
 };`,
     diagram: "Vehicle ← Car (IS-A)",
-    keypoint: "Use inheritance for genuine IS‑A, not just code reuse."
+    keypoint: "Use inheritance for genuine IS‑A, not just code reuse.",
   },
   {
     id: 7,
@@ -147,7 +153,7 @@ class UPI : public Payment {
     void pay() override { cout << "UPI payment"; }
 };`,
     diagram: "Payment (contract) → UPI, Card, Wallet (different behaviors)",
-    keypoint: "Polymorphism = same interface, different runtime behavior."
+    keypoint: "Polymorphism = same interface, different runtime behavior.",
   },
   {
     id: 8,
@@ -165,7 +171,7 @@ private:
     Patient* patient;
 };`,
     diagram: "Doctor ↔ Patient (related/interacts)",
-    keypoint: "Association = related to / interacts with."
+    keypoint: "Association = related to / interacts with.",
   },
   {
     id: 9,
@@ -183,7 +189,7 @@ private:
     vector<Player*> players;
 };`,
     diagram: "Team ◇── Player (independent lifecycle)",
-    keypoint: "Aggregation = HAS‑A + independent lifecycle."
+    keypoint: "Aggregation = HAS‑A + independent lifecycle.",
   },
   {
     id: 10,
@@ -203,7 +209,7 @@ private:
     Room room2;
 };`,
     diagram: "House ◆── Room (tied lifecycle)",
-    keypoint: "Composition = OWNS‑A + lifecycle dependency."
+    keypoint: "Composition = OWNS‑A + lifecycle dependency.",
   },
   {
     id: 11,
@@ -223,7 +229,7 @@ public:
     void generate(Printer& printer);
 };`,
     diagram: "A → uses → B (temporary)",
-    keypoint: "Dependency = temporarily relies on another."
+    keypoint: "Dependency = temporarily relies on another.",
   },
   {
     id: 12,
@@ -239,7 +245,7 @@ public:
     virtual ~Payment() = default;
 };`,
     diagram: "Interface → pay() → implemented by UPI, Card, Wallet",
-    keypoint: "Interface = contract for behavior."
+    keypoint: "Interface = contract for behavior.",
   },
   {
     id: 13,
@@ -247,7 +253,8 @@ public:
     name: "Abstract Class",
     hue: "violet",
     icon: "🧱",
-    description: "Common base with shared state/behavior, leaving some methods to subclasses.",
+    description:
+      "Common base with shared state/behavior, leaving some methods to subclasses.",
     content: `C++:
 class Vehicle {
 public:
@@ -256,7 +263,7 @@ public:
     virtual ~Vehicle() = default;
 };`,
     diagram: "Vehicle (abstract) ← Car, Bike",
-    keypoint: "Abstract class = common base + shared implementation."
+    keypoint: "Abstract class = common base + shared implementation.",
   },
   {
     id: 14,
@@ -274,7 +281,8 @@ ABSTRACT CLASS
 → Shared state/behavior possible
 → WHAT is common + WHAT must vary`,
     diagram: "Interface = WHAT; Abstract = common + variation",
-    keypoint: "Use interface for capability; abstract class for shared foundation."
+    keypoint:
+      "Use interface for capability; abstract class for shared foundation.",
   },
   {
     id: 15,
@@ -290,7 +298,8 @@ Composition (HAS‑A):
 Car
  └── Engine`,
     diagram: "Inheritance = specialization; Composition = assembly",
-    keypoint: "Prefer composition for flexibility; inheritance for true specialization."
+    keypoint:
+      "Prefer composition for flexibility; inheritance for true specialization.",
   },
   {
     id: 16,
@@ -304,7 +313,7 @@ Aggregation → HAS‑A / groups (independent lifecycle)
 Composition → Strong HAS‑A / owns (tied lifecycle)
 Dependency → Temporarily uses`,
     diagram: "Association ↔ Aggregation ◇ Composition ◆ Dependency →",
-    keypoint: "Know the differences: strength and lifecycle."
+    keypoint: "Know the differences: strength and lifecycle.",
   },
   {
     id: 17,
@@ -328,8 +337,9 @@ Need abstraction? → Interface / Abstract Class
 Different implementations? → Polymorphism
   ↓
 Genuine IS‑A? → Inheritance`,
-    diagram: "Requirement → Objects → State/Behavior → Responsibilities → Relationships → Abstraction → Polymorphism → Inheritance",
-    keypoint: "This is the LLD design flow."
+    diagram:
+      "Requirement → Objects → State/Behavior → Responsibilities → Relationships → Abstraction → Polymorphism → Inheritance",
+    keypoint: "This is the LLD design flow.",
   },
   {
     id: 18,
@@ -352,7 +362,7 @@ What responsibility naturally follows?
 
 Examples: Create, Validate, Calculate, Maintain state, Change state, Enforce rules, Find/retrieve, Coordinate, Perform operation.`,
     diagram: "KNOWS → DOES → RULES → OWN → RESPONSIBILITY",
-    keypoint: "Which object has the information needed?"
+    keypoint: "Which object has the information needed?",
   },
   {
     id: 19,
@@ -368,7 +378,7 @@ CLASS contains:
 → STATE it owns
 → BEHAVIOR it is responsible for`,
     diagram: "Class = State + Behavior",
-    keypoint: "Keep it simple."
+    keypoint: "Keep it simple.",
   },
   {
     id: 20,
@@ -398,8 +408,9 @@ Do different implementations behave differently?
 Is there a genuine IS‑A?
   ↓
 Inheritance or Composition?`,
-    diagram: "Things → Knows → Does → Rules → Responsibility → Relationships → Abstraction → Contract → Polymorphism → IS‑A → Decision",
-    keypoint: "Always start with the things and their responsibilities."
+    diagram:
+      "Things → Knows → Does → Rules → Responsibility → Relationships → Abstraction → Contract → Polymorphism → IS‑A → Decision",
+    keypoint: "Always start with the things and their responsibilities.",
   },
   {
     id: 21,
@@ -409,9 +420,10 @@ Inheritance or Composition?`,
     icon: "🔥",
     description: "The entire Day 3 in one flow.",
     content: `CLASS → OBJECT → KNOWS+DOES+RULES → RESPONSIBILITY → ENCAPSULATION → ABSTRACTION → RELATIONSHIPS (Association, Aggregation, Composition, Dependency) → INTERFACE → ABSTRACT CLASS → POLYMORPHISM → INHERITANCE → COMPOSITION vs INHERITANCE → OBJECT-THINKING FRAMEWORK`,
-    diagram: "Class → Object → Responsibility → Encapsulation → Abstraction → Relationships → Interface → Abstract → Polymorphism → Inheritance → Composition vs Inheritance",
-    keypoint: "This is the complete mental model."
-  }
+    diagram:
+      "Class → Object → Responsibility → Encapsulation → Abstraction → Relationships → Interface → Abstract → Polymorphism → Inheritance → Composition vs Inheritance",
+    keypoint: "This is the complete mental model.",
+  },
 ];
 
 // Day 4: UML + Visual Design concepts
@@ -422,7 +434,8 @@ const DAY4_CONCEPTS = [
     name: "UML Purpose",
     hue: "indigo",
     icon: "🎨",
-    description: "UML = Unified Modeling Language. A visual language for communicating software design.",
+    description:
+      "UML = Unified Modeling Language. A visual language for communicating software design.",
     content: `UML is NOT memorization; it's showing your thinking.
 
 It answers 5 core questions:
@@ -432,7 +445,7 @@ It answers 5 core questions:
 4. HOW does object change? → State
 5. HOW does process flow? → Activity`,
     diagram: "Requirement → Use Case → Class → Sequence → State → Activity",
-    keypoint: "UML visualizes the object design you already learned."
+    keypoint: "UML visualizes the object design you already learned.",
   },
   {
     id: 23,
@@ -440,7 +453,8 @@ It answers 5 core questions:
     name: "Use Case Diagram",
     hue: "blue",
     icon: "👤",
-    description: "WHO interacts with the system and WHAT do they want to accomplish?",
+    description:
+      "WHO interacts with the system and WHAT do they want to accomplish?",
     content: `Actor: external entity (Student, Admin, Payment Gateway).
 Use Case: goal/action (Search Book, Borrow Book, Return Book).
 
@@ -452,7 +466,7 @@ Example:
  Search Borrow Return
   Book   Book   Book`,
     diagram: "Actor ─── Use Case (oval)",
-    keypoint: "Use Case = WHO wants WHAT."
+    keypoint: "Use Case = WHO wants WHAT.",
   },
   {
     id: 24,
@@ -460,7 +474,8 @@ Example:
     name: "Class Diagram",
     hue: "cyan",
     icon: "🧱",
-    description: "WHAT exists? Classes, their attributes, methods, and relationships.",
+    description:
+      "WHAT exists? Classes, their attributes, methods, and relationships.",
     content: `Class box: top (name), middle (attributes), bottom (methods).
 
 Visibility:
@@ -479,7 +494,7 @@ Example:
 │ + returnBook()   │
 └──────────────────┘`,
     diagram: "Class = structure (attributes + methods)",
-    keypoint: "Class diagram shows static structure."
+    keypoint: "Class diagram shows static structure.",
   },
   {
     id: 25,
@@ -502,8 +517,10 @@ Multiplicity:
 1..*   one or more
 
 Example: Customer 1 ───── 0..* Order`,
-    diagram: "Association ─, Aggregation ◇, Composition ◆, Dependency - - >, Inheritance ▲",
-    keypoint: "Relationships define connections; multiplicity defines quantity."
+    diagram:
+      "Association ─, Aggregation ◇, Composition ◆, Dependency - - >, Inheritance ▲",
+    keypoint:
+      "Relationships define connections; multiplicity defines quantity.",
   },
   {
     id: 26,
@@ -528,7 +545,7 @@ Student        Library        Book
    │ success      │             │
    │<─────────────┤             │`,
     diagram: "Actor → Object1 → Object2",
-    keypoint: "Sequence = interaction over time."
+    keypoint: "Sequence = interaction over time.",
   },
   {
     id: 27,
@@ -554,7 +571,7 @@ Example – Book:
 │ Available │
 └───────────┘`,
     diagram: "State1 --event--> State2",
-    keypoint: "State = object lifecycle."
+    keypoint: "State = object lifecycle.",
   },
   {
     id: 28,
@@ -566,22 +583,24 @@ Example – Book:
     content: `Actions (rounded rectangles), decisions (diamonds), start/end nodes.
 
 Example – Borrow Book:
-START
-  ↓
+
+    START
+      ↓
 Search for Book
-  ↓
-Is Available?
-  /        \
-YES         NO
-  ↓          ↓
-Borrow    Show Error
-  ↓          ↓
-Update      END
+      ↓
+ Is Available?
+  ↙        ↘
+YES          NO
+↓             ↓
+Borrow      Show Error
+↓             ↓
+Update       END
 Status
-  ↓
+↓
 END`,
+
     diagram: "Start → Action → Decision → ... → End",
-    keypoint: "Activity = process flow."
+    keypoint: "Activity = process flow.",
   },
   {
     id: 29,
@@ -600,27 +619,123 @@ Remember:
 UML is not memorization.
 UML is a way to SHOW your thinking.`,
     diagram: "Question → Diagram",
-    keypoint: "Ask the right question to pick the right diagram."
-  }
+    keypoint: "Ask the right question to pick the right diagram.",
+  },
 ];
 
 const HUE_MAP = {
-  blue: { border: "border-blue-200 dark:border-blue-500/25", bg: "bg-blue-50/70 dark:bg-blue-500/[0.06]", text: "text-blue-600 dark:text-blue-300", badge: "bg-blue-500", accent: "text-blue-500 dark:text-blue-400" },
-  cyan: { border: "border-cyan-200 dark:border-cyan-500/25", bg: "bg-cyan-50/70 dark:bg-cyan-500/[0.06]", text: "text-cyan-600 dark:text-cyan-300", badge: "bg-cyan-500", accent: "text-cyan-500 dark:text-cyan-400" },
-  teal: { border: "border-teal-200 dark:border-teal-500/25", bg: "bg-teal-50/70 dark:bg-teal-500/[0.06]", text: "text-teal-600 dark:text-teal-300", badge: "bg-teal-500", accent: "text-teal-500 dark:text-teal-400" },
-  emerald: { border: "border-emerald-200 dark:border-emerald-500/25", bg: "bg-emerald-50/70 dark:bg-emerald-500/[0.06]", text: "text-emerald-600 dark:text-emerald-300", badge: "bg-emerald-500", accent: "text-emerald-500 dark:text-emerald-400" },
-  lime: { border: "border-lime-200 dark:border-lime-500/25", bg: "bg-lime-50/70 dark:bg-lime-500/[0.06]", text: "text-lime-700 dark:text-lime-300", badge: "bg-lime-500", accent: "text-lime-600 dark:text-lime-400" },
-  green: { border: "border-green-200 dark:border-green-500/25", bg: "bg-green-50/70 dark:bg-green-500/[0.06]", text: "text-green-600 dark:text-green-300", badge: "bg-green-500", accent: "text-green-500 dark:text-green-400" },
-  sky: { border: "border-sky-200 dark:border-sky-500/25", bg: "bg-sky-50/70 dark:bg-sky-500/[0.06]", text: "text-sky-600 dark:text-sky-300", badge: "bg-sky-500", accent: "text-sky-500 dark:text-sky-400" },
-  indigo: { border: "border-indigo-200 dark:border-indigo-500/25", bg: "bg-indigo-50/70 dark:bg-indigo-500/[0.06]", text: "text-indigo-600 dark:text-indigo-300", badge: "bg-indigo-500", accent: "text-indigo-500 dark:text-indigo-400" },
-  violet: { border: "border-violet-200 dark:border-violet-500/25", bg: "bg-violet-50/70 dark:bg-violet-500/[0.06]", text: "text-violet-600 dark:text-violet-300", badge: "bg-violet-500", accent: "text-violet-500 dark:text-violet-400" },
-  purple: { border: "border-purple-200 dark:border-purple-500/25", bg: "bg-purple-50/70 dark:bg-purple-500/[0.06]", text: "text-purple-600 dark:text-purple-300", badge: "bg-purple-500", accent: "text-purple-500 dark:text-purple-400" },
-  pink: { border: "border-pink-200 dark:border-pink-500/25", bg: "bg-pink-50/70 dark:bg-pink-500/[0.06]", text: "text-pink-600 dark:text-pink-300", badge: "bg-pink-500", accent: "text-pink-500 dark:text-pink-400" },
-  rose: { border: "border-rose-200 dark:border-rose-500/25", bg: "bg-rose-50/70 dark:bg-rose-500/[0.06]", text: "text-rose-600 dark:text-rose-300", badge: "bg-rose-500", accent: "text-rose-500 dark:text-rose-400" },
-  red: { border: "border-red-200 dark:border-red-500/25", bg: "bg-red-50/70 dark:bg-red-500/[0.06]", text: "text-red-600 dark:text-red-300", badge: "bg-red-500", accent: "text-red-500 dark:text-red-400" },
-  orange: { border: "border-orange-200 dark:border-orange-500/25", bg: "bg-orange-50/70 dark:bg-orange-500/[0.06]", text: "text-orange-600 dark:text-orange-300", badge: "bg-orange-500", accent: "text-orange-500 dark:text-orange-400" },
-  amber: { border: "border-amber-200 dark:border-amber-500/25", bg: "bg-amber-50/70 dark:bg-amber-500/[0.06]", text: "text-amber-600 dark:text-amber-300", badge: "bg-amber-500", accent: "text-amber-500 dark:text-amber-400" },
-  fuchsia: { border: "border-fuchsia-200 dark:border-fuchsia-500/25", bg: "bg-fuchsia-50/70 dark:bg-fuchsia-500/[0.06]", text: "text-fuchsia-600 dark:text-fuchsia-300", badge: "bg-fuchsia-500", accent: "text-fuchsia-500 dark:text-fuchsia-400" },
+  blue: {
+    border: "border-blue-200 dark:border-blue-500/25",
+    bg: "bg-blue-50/70 dark:bg-blue-500/[0.06]",
+    text: "text-blue-600 dark:text-blue-300",
+    badge: "bg-blue-500",
+    accent: "text-blue-500 dark:text-blue-400",
+  },
+  cyan: {
+    border: "border-cyan-200 dark:border-cyan-500/25",
+    bg: "bg-cyan-50/70 dark:bg-cyan-500/[0.06]",
+    text: "text-cyan-600 dark:text-cyan-300",
+    badge: "bg-cyan-500",
+    accent: "text-cyan-500 dark:text-cyan-400",
+  },
+  teal: {
+    border: "border-teal-200 dark:border-teal-500/25",
+    bg: "bg-teal-50/70 dark:bg-teal-500/[0.06]",
+    text: "text-teal-600 dark:text-teal-300",
+    badge: "bg-teal-500",
+    accent: "text-teal-500 dark:text-teal-400",
+  },
+  emerald: {
+    border: "border-emerald-200 dark:border-emerald-500/25",
+    bg: "bg-emerald-50/70 dark:bg-emerald-500/[0.06]",
+    text: "text-emerald-600 dark:text-emerald-300",
+    badge: "bg-emerald-500",
+    accent: "text-emerald-500 dark:text-emerald-400",
+  },
+  lime: {
+    border: "border-lime-200 dark:border-lime-500/25",
+    bg: "bg-lime-50/70 dark:bg-lime-500/[0.06]",
+    text: "text-lime-700 dark:text-lime-300",
+    badge: "bg-lime-500",
+    accent: "text-lime-600 dark:text-lime-400",
+  },
+  green: {
+    border: "border-green-200 dark:border-green-500/25",
+    bg: "bg-green-50/70 dark:bg-green-500/[0.06]",
+    text: "text-green-600 dark:text-green-300",
+    badge: "bg-green-500",
+    accent: "text-green-500 dark:text-green-400",
+  },
+  sky: {
+    border: "border-sky-200 dark:border-sky-500/25",
+    bg: "bg-sky-50/70 dark:bg-sky-500/[0.06]",
+    text: "text-sky-600 dark:text-sky-300",
+    badge: "bg-sky-500",
+    accent: "text-sky-500 dark:text-sky-400",
+  },
+  indigo: {
+    border: "border-indigo-200 dark:border-indigo-500/25",
+    bg: "bg-indigo-50/70 dark:bg-indigo-500/[0.06]",
+    text: "text-indigo-600 dark:text-indigo-300",
+    badge: "bg-indigo-500",
+    accent: "text-indigo-500 dark:text-indigo-400",
+  },
+  violet: {
+    border: "border-violet-200 dark:border-violet-500/25",
+    bg: "bg-violet-50/70 dark:bg-violet-500/[0.06]",
+    text: "text-violet-600 dark:text-violet-300",
+    badge: "bg-violet-500",
+    accent: "text-violet-500 dark:text-violet-400",
+  },
+  purple: {
+    border: "border-purple-200 dark:border-purple-500/25",
+    bg: "bg-purple-50/70 dark:bg-purple-500/[0.06]",
+    text: "text-purple-600 dark:text-purple-300",
+    badge: "bg-purple-500",
+    accent: "text-purple-500 dark:text-purple-400",
+  },
+  pink: {
+    border: "border-pink-200 dark:border-pink-500/25",
+    bg: "bg-pink-50/70 dark:bg-pink-500/[0.06]",
+    text: "text-pink-600 dark:text-pink-300",
+    badge: "bg-pink-500",
+    accent: "text-pink-500 dark:text-pink-400",
+  },
+  rose: {
+    border: "border-rose-200 dark:border-rose-500/25",
+    bg: "bg-rose-50/70 dark:bg-rose-500/[0.06]",
+    text: "text-rose-600 dark:text-rose-300",
+    badge: "bg-rose-500",
+    accent: "text-rose-500 dark:text-rose-400",
+  },
+  red: {
+    border: "border-red-200 dark:border-red-500/25",
+    bg: "bg-red-50/70 dark:bg-red-500/[0.06]",
+    text: "text-red-600 dark:text-red-300",
+    badge: "bg-red-500",
+    accent: "text-red-500 dark:text-red-400",
+  },
+  orange: {
+    border: "border-orange-200 dark:border-orange-500/25",
+    bg: "bg-orange-50/70 dark:bg-orange-500/[0.06]",
+    text: "text-orange-600 dark:text-orange-300",
+    badge: "bg-orange-500",
+    accent: "text-orange-500 dark:text-orange-400",
+  },
+  amber: {
+    border: "border-amber-200 dark:border-amber-500/25",
+    bg: "bg-amber-50/70 dark:bg-amber-500/[0.06]",
+    text: "text-amber-600 dark:text-amber-300",
+    badge: "bg-amber-500",
+    accent: "text-amber-500 dark:text-amber-400",
+  },
+  fuchsia: {
+    border: "border-fuchsia-200 dark:border-fuchsia-500/25",
+    bg: "bg-fuchsia-50/70 dark:bg-fuchsia-500/[0.06]",
+    text: "text-fuchsia-600 dark:text-fuchsia-300",
+    badge: "bg-fuchsia-500",
+    accent: "text-fuchsia-500 dark:text-fuchsia-400",
+  },
 };
 
 function useRevealOnScroll() {
@@ -637,7 +752,7 @@ function useRevealOnScroll() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.01, rootMargin: "0px 0px -10px 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px -10px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -696,7 +811,9 @@ function ConceptCard({ concept }) {
       {concept.keypoint && (
         <div className="flex items-start gap-3 rounded-xl bg-white dark:bg-white/5 px-5 py-4 shadow-sm">
           <span className="text-lg flex-shrink-0">🔑</span>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200 leading-relaxed">{concept.keypoint}</p>
+          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200 leading-relaxed">
+            {concept.keypoint}
+          </p>
         </div>
       )}
     </div>
@@ -726,29 +843,33 @@ const SystemDesign2_OOPS = () => {
     const onScroll = () => {
       const h = document.documentElement;
       const scrollTop = h.scrollTop || document.body.scrollTop;
-      const scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+      const scrollHeight =
+        (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
       setProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
 
       setShowTopArrow(scrollTop > 200);
       setShowBottomArrow(scrollTop > 200 && scrollTop < scrollHeight - 200);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollToBottom = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-gray-950 transition-colors duration-500">
       {/* scroll progress */}
-      <div className="fixed top-0 left-0 h-[3px] bg-indigo-500 z-50 print:hidden" style={{ width: `${progress}%` }} />
+      <div
+        className="fixed top-0 left-0 h-[3px] bg-indigo-500 z-50 print:hidden"
+        style={{ width: `${progress}%` }}
+      />
 
       {/* floating scroll arrows */}
       {showTopArrow && (
@@ -757,7 +878,15 @@ const SystemDesign2_OOPS = () => {
           className="fixed top-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-500 transition-all"
           title="Go to bottom"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5"
+          >
             <path d="M12 5v14" />
             <path d="m19 12-7 7-7-7" />
           </svg>
@@ -770,7 +899,15 @@ const SystemDesign2_OOPS = () => {
           className="fixed bottom-20 right-4 z-40 print:hidden flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-500 transition-all"
           title="Go to top"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5"
+          >
             <path d="M12 19V5" />
             <path d="m5 12 7-7 7 7" />
           </svg>
@@ -821,7 +958,8 @@ const SystemDesign2_OOPS = () => {
             Turn requirements into interacting objects.
           </h2>
           <p className="text-lg text-white/90 font-semibold">
-            OOP for LLD is about responsibility-driven design — identify things, their state, behavior, rules, relationships, and abstractions.
+            OOP for LLD is about responsibility-driven design — identify things,
+            their state, behavior, rules, relationships, and abstractions.
           </p>
         </RevealSection>
 
@@ -859,12 +997,19 @@ const SystemDesign2_OOPS = () => {
           </div>
           <div className="space-y-4">
             <p className="text-gray-700 dark:text-gray-300 font-mono text-sm">
-              Requirement → Things → KNOWS + DOES + RULES → Responsibility → Relationships → Abstraction → Polymorphism → Inheritance/Composition
+              Requirement → Things → KNOWS + DOES + RULES → Responsibility →
+              Relationships → Abstraction → Polymorphism →
+              Inheritance/Composition
             </p>
             <div className="bg-gray-100 dark:bg-black/30 p-4 rounded-lg">
-              <p className="font-bold text-gray-900 dark:text-white mb-2">Always ask:</p>
+              <p className="font-bold text-gray-900 dark:text-white mb-2">
+                Always ask:
+              </p>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Which object has the information needed for this responsibility?</li>
+                <li>
+                  Which object has the information needed for this
+                  responsibility?
+                </li>
                 <li>Is this a genuine IS‑A or a HAS‑A?</li>
                 <li>What contract should implementations follow?</li>
                 <li>What are the trade‑offs?</li>
@@ -876,9 +1021,15 @@ const SystemDesign2_OOPS = () => {
         {/* Golden Rule */}
         <RevealSection className="rounded-3xl bg-gray-900 dark:bg-white/5 p-10 sm:p-14 text-white border border-white/10 text-center">
           <span className="text-4xl">❤️‍🔥</span>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold">The Golden Rule</h2>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold">
+            The Golden Rule
+          </h2>
           <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-white/80 leading-relaxed">
-            Don't ask "which classes?" — ask <span className="font-bold text-white">"what things exist, what do they know, what do they do, and what rules do they own?"</span>
+            Don't ask "which classes?" — ask{" "}
+            <span className="font-bold text-white">
+              "what things exist, what do they know, what do they do, and what
+              rules do they own?"
+            </span>
           </p>
           <p className="mt-8 text-base font-bold tracking-wide text-white/70">
             Responsibilities drive the design.

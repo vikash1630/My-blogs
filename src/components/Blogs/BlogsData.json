@@ -58,5 +58,11 @@
     "title": "System Design - 2 (OOPS)",
     "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
     "image": "/SD2.jpg"
+  },
+  {
+    "id": "SystemDesign-part-3",
+    "title": "System Design - 3 - Design Concepts and Parking Lot (Example)",
+    "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
+    "image": "/SD3.png"
   }
 ]
