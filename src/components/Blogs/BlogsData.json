@@ -64,5 +64,11 @@
     "title": "System Design - 3 - Design Concepts and Parking Lot (Example)",
     "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
     "image": "/SD3.png"
+  },
+  {
+    "id": "SystemDesign-part-4",
+    "title": "System Design - 4 - Scalability, Load Balancing & Database Design",
+    "description": "Master system scalability and database design: scaling, load balancing, bottlenecks, failover, SQL vs NoSQL, indexes, transactions, ACID, replication, partitioning, sharding, caching, and read/write splitting. Practice designing systems for 100× traffic and 10M+ users.",
+    "image": "/SD4.png"
   }
 ]
