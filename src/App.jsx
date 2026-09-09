@@ -23,6 +23,7 @@ import OOP1 from "./components/Blogs/ObjectOrientedProgramming/OOP1";
 import SystemDesign3 from "./components/Blogs/SystemDesign/SystemDesign3";
 import ScrollToTop from "./components/UI/ScrollToTop";
 import SystemDesign4 from "./components/Blogs/SystemDesign/SystemDesign4";
+import SystemDesign5 from "./components/Blogs/SystemDesign/SystemDesign5";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         />
         <Route path="/blogs/SystemDesign-part-3" element={<SystemDesign3 />} />
         <Route path="/blogs/SystemDesign-part-4" element={<SystemDesign4 />} />
+        <Route path="/blogs/SystemDesign-part-5" element={<SystemDesign5 />} />
 
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

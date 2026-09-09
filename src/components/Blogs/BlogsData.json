@@ -70,5 +70,11 @@
     "title": "System Design - 4 - Scalability, Load Balancing & Database Design",
     "description": "Master system scalability and database design: scaling, load balancing, bottlenecks, failover, SQL vs NoSQL, indexes, transactions, ACID, replication, partitioning, sharding, caching, and read/write splitting. Practice designing systems for 100× traffic and 10M+ users.",
     "image": "/SD4.png"
+  },
+  {
+    "id": "SystemDesign-part-5",
+    "title": "System Design - 5 - Caching, Async Systems & Queues",
+    "description": "Master caching and asynchronous system design: cache hits and misses, invalidation, TTL, cache stampede, request coalescing, timeouts, backpressure, fail-fast, queues, workers, acknowledgements, retries, idempotency, transactional outbox, dead letter queues, worker scaling, and system monitoring.",
+    "image": "/SD5.png"
   }
 ]
