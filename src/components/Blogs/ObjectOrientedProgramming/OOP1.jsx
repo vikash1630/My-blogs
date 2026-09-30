@@ -609,7 +609,7 @@ const OOP1 = () => {
               OOP + Object Thinking
             </h1>
             <p className="mt-3 text-lg sm:text-xl text-gray-500 dark:text-gray-400">
-              Day 3 — LLD Master Revision Sheet
+              LLD Master Revision Sheet
             </p>
           </div>
           {/* Optional download if you have a PDF; we can skip or keep generic */}
@@ -640,7 +640,7 @@ const OOP1 = () => {
         {/* All concepts */}
         <RevealSection className="mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-10">
-            Day 3: OOP + Object Thinking
+            OOP + Object Thinking
           </h2>
           <div className="flex flex-col gap-10">
             {concepts.map((concept) => (
