@@ -1,0 +1,77 @@
+[
+  {
+    "category": "React",
+    "description": "Understand how React works from start to finish, from components to the UI you see in the browser.",
+    "topics": [
+      "Components",
+      "JSX",
+      "Props",
+      "State",
+      "Events",
+      "Virtual DOM",
+      "Re-renders",
+      "Hooks"
+    ]
+  },
+  {
+    "category": "OOP",
+    "description": "Learn object oriented programming and how to think in objects for low level design.",
+    "topics": [
+      "Classes & Objects",
+      "Encapsulation",
+      "Abstraction",
+      "Inheritance",
+      "Polymorphism",
+      "Interfaces",
+      "Abstract Classes",
+      "Composition vs Inheritance"
+    ]
+  },
+  {
+    "category": "DSA",
+    "description": "A quick guide to recognise the right pattern before you start writing code.",
+    "topics": [
+      "25 DSA Patterns",
+      "Trigger Clues",
+      "Pattern Recognition"
+    ]
+  },
+  {
+    "category": "Computer Networks",
+    "description": "Build a clear picture of networking, from bits and IP addresses to HTTPS, proxies and network security.",
+    "topics": [
+      "OSI Layers",
+      "MAC & IP Address",
+      "NAT",
+      "Ports & Sockets",
+      "TCP & UDP",
+      "3-Way Handshake",
+      "Congestion Control",
+      "DNS",
+      "HTTP & HTTPS",
+      "CDN",
+      "Proxies",
+      "Load Balancer",
+      "CORS",
+      "Network Security"
+    ]
+  },
+  {
+    "category": "System Design",
+    "description": "Learn how to design systems that scale, from basic concepts to databases, caching and queues.",
+    "topics": [
+      "Scalability",
+      "Availability",
+      "Load Balancing",
+      "SQL vs NoSQL",
+      "Indexes",
+      "Sharding",
+      "Replication",
+      "Caching",
+      "Queues",
+      "Retries",
+      "Idempotency",
+      "Parking Lot LLD"
+    ]
+  }
+]

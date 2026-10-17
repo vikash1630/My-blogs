@@ -5,6 +5,7 @@ import Home from "./components/UI/Home";
 import About from "./components/UI/About";
 import Contact from "./components/UI/Contact";
 import Blogs from "./components/Blogs/Blogs";
+import CategoryPage from "./components/Blogs/CategoryPage";
 
 import DsaCheatSheet from "./components/Blogs/DataStructures/DsaCheatSheet";
 import Part1 from "./components/Blogs/ComputerNetworks/Part1";
@@ -35,6 +36,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/blogs" element={<Blogs />} />
+
+        <Route path="/category/:category" element={<CategoryPage />} />
 
         {/* Dsa */}
         <Route path="/blogs/dsa-cheatsheet" element={<DsaCheatSheet />} />

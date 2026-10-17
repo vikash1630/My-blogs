@@ -2,78 +2,91 @@
   {
     "id": "React",
     "title": "React Working Flow: From Components to UI",
+    "category": "React",
     "description": "Understand how React works from start to finish — components, JSX, props, state, events, rendering, the Virtual DOM, re-renders, hooks, and how React updates the browser UI.",
     "image": "/React1.png"
   },
   {
     "id": "OOPS",
     "title": "Object Oriented Programming",
+    "category": "OOP",
     "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
     "image": "/OOP1.png"
   },
   {
     "id": "dsa-cheatsheet",
     "title": "DSA Pattern Recognition Cheat Sheet",
+    "category": "DSA",
     "description": "A quick-reference guide covering 25 recurring DSA patterns, their trigger clues, and recognition techniques to help you identify the right pattern before writing code.",
     "image": "/dsa.png"
   },
   {
     "id": "CN-part-1",
     "title": "Computer Networks Part 1: From Bits to NAT",
+    "category": "Computer Networks",
     "description": "Build a strong mental model of networking from layers, bits, signals, and NICs to frames, MAC addresses, switches, IP addressing, routers, ARP, IPv4, private/public IPs, and NAT.",
     "image": "/CN1.png"
   },
   {
     "id": "CN-part-2",
     "title": "Computer Networks Part 2: Transport Layer, Ports & Sockets",
+    "category": "Computer Networks",
     "description": "Understand how networking moves from host-to-host delivery to application-level communication through ports, TCP and UDP, ephemeral ports, 4-tuples, sockets, listening connections, and NAT port mapping.",
     "image": "/CN2.png"
   },
   {
     "id": "CN-part-3",
     "title": "Computer Networks Part 3: TCP Reliability & Congestion Control",
+    "category": "Computer Networks",
     "description": "Dive into TCP internals including the 3-way handshake, sequence numbers, ACKs, retransmission, out-of-order data, sliding windows, flow control, congestion control, Slow Start, connection termination, FIN, RST, and TIME_WAIT.",
     "image": "/CN3.png"
   },
   {
     "id": "CN-part-4",
     "title": "Computer Networks Part 4: DNS, HTTP, HTTPS & CDN",
+    "category": "Computer Networks",
     "description": "Understand how applications communicate over the network through DNS resolution, HTTP requests and responses, HTTPS with TLS and certificates, HTTP caching, and CDNs that deliver content closer to users.",
     "image": "/CN4.png"
   },
   {
     "id": "CN-part-5",
     "title": "Computer Networks Part 5: Proxies, Architecture & Network Security",
+    "category": "Computer Networks",
     "description": "Complete the SDE-1 networking picture with CDNs, forward and reverse proxies, load balancers, VPNs, API gateways, 3-tier architecture, monoliths vs microservices, CORS, network security, common attacks, MTU, PMTUD, and end-to-end request flows.",
     "image": "/CN5.png"
   },
   {
     "id": "SystemDesign-part-1",
     "title": "System Design Fundamentals & Networking",
+    "category": "System Design",
     "description": "Learn core system design concepts including scalability, availability, reliability, performance, fault tolerance, and trade-offs. Understand DNS, TCP/UDP, HTTP/HTTPS, TLS, REST, authentication, sessions, JWT, load balancers, and databases. Practice client-server architecture, request flows, bottleneck identification, and scaling real-world systems.",
     "image": "/SD1.png"
   },
   {
     "id": "SystemDesign-part-2-OOPS",
     "title": "System Design - 2 (OOPS)",
+    "category": "System Design",
     "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
     "image": "/SD2.jpg"
   },
   {
     "id": "SystemDesign-part-3",
     "title": "System Design - 3 - Design Concepts and Parking Lot (Example)",
+    "category": "System Design",
     "description": "Master OOP for LLD: classes, objects, responsibilities, encapsulation, abstraction, inheritance, polymorphism, interfaces, abstract classes, and object relationships such as association, aggregation, composition, and dependency. Build strong object-thinking skills and choose composition vs inheritance effectively.",
     "image": "/SD3.png"
   },
   {
     "id": "SystemDesign-part-4",
     "title": "System Design - 4 - Scalability, Load Balancing & Database Design",
+    "category": "System Design",
     "description": "Master system scalability and database design: scaling, load balancing, bottlenecks, failover, SQL vs NoSQL, indexes, transactions, ACID, replication, partitioning, sharding, caching, and read/write splitting. Practice designing systems for 100× traffic and 10M+ users.",
     "image": "/SD4.png"
   },
   {
     "id": "SystemDesign-part-5",
     "title": "System Design - 5 - Caching, Async Systems & Queues",
+    "category": "System Design",
     "description": "Master caching and asynchronous system design: cache hits and misses, invalidation, TTL, cache stampede, request coalescing, timeouts, backpressure, fail-fast, queues, workers, acknowledgements, retries, idempotency, transactional outbox, dead letter queues, worker scaling, and system monitoring.",
     "image": "/SD5.png"
   }

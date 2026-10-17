@@ -1,201 +1,167 @@
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
+import SearchBar from "./SearchBar";
+
+const navLinks = [
+  { name: "Blogs", path: "/blogs" },
+  { name: "About Me", path: "/about" },
+  { name: "Contact", path: "/contact" },
+  {
+    name: "Portfolio",
+    path: "https://vikashportfolio-psi.vercel.app/",
+    external: true,
+  },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("light");
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
 
+  // apply theme whenever it changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-    setMounted(true);
-  }, []);
-
-  const applyTheme = (themeValue) => {
     const root = document.documentElement;
-    if (themeValue === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    root.style.colorScheme = themeValue;
-  };
+    root.classList.toggle("dark", theme === "dark");
+    root.style.colorScheme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    applyTheme(newTheme);
-  };
+  const toggleTheme = () =>
+    setTheme((t) => (t === "light" ? "dark" : "light"));
 
-  const handleNavClick = () => {
-    setMenuOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
-  const navLinks = [
-    { name: "Blogs", path: "/blogs" },
-    { name: "About Me", path: "/about" },
-    { name: "Contact", path: "/contact" },
-    { name: "Portfolio", path: "https://vikashportfolio-psi.vercel.app/", external: true },
-  ];
+  const linkBase =
+    "text-sm font-medium rounded-md transition-colors duration-200";
+  const linkActive =
+    "text-gray-900 dark:text-white bg-gray-100 dark:bg-white/10";
+  const linkIdle =
+    "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5";
 
-  if (!mounted) return null;
+  const iconBtn =
+    "flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
 
   return (
     <>
-      <nav className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/95 backdrop-blur-sm dark:border-gray-700/50 dark:bg-gray-950/95 transition-colors duration-300">
-        {/* Full width, small consistent side padding — no max-w container eating space */}
-        <div className="flex h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-10">
-          
+      <nav className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md">
+        <div className="flex h-16 w-full items-center gap-3 px-4 sm:px-6 lg:px-10">
           {/* Logo */}
-          <Link
-            to="/"
-            className="group flex items-center gap-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white transition-all duration-300 flex-shrink-0"
-          >
-            <div className="relative">
-              <span className="block">Vikash</span>
-              <span className="absolute bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-            </div>
-            <span className="text-blue-600 dark:text-blue-400 text-2xl font-light animate-pulse">.</span>
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-bold text-white shadow-sm">
+              V
+            </span>
+            <span className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+              Vikash
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1 ml-4">
+            {navLinks.map((link) =>
               link.external ? (
                 <a
                   key={link.name}
                   href={link.path}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300 hover:text-gray-900 dark:hover:text-white group"
+                  className={`${linkBase} ${linkIdle} flex items-center gap-1 px-3 py-2`}
                 >
                   {link.name}
-                  <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
+                  <ExternalLink size={13} />
                 </a>
               ) : (
                 <NavLink
                   key={link.name}
                   to={link.path}
                   className={({ isActive }) =>
-                    `relative px-3 py-2 text-sm font-medium transition-colors duration-300 group ${
-                      isActive
-                        ? "text-blue-600 dark:text-blue-400"
-                        : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                    }`
+                    `${linkBase} px-3 py-2 ${isActive ? linkActive : linkIdle}`
                   }
                 >
                   {link.name}
-                  <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
                 </NavLink>
               )
-            ))}
+            )}
           </div>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          {/* Search */}
+          <div className="flex-1 min-w-0 md:flex-none md:ml-auto md:w-72 lg:w-80">
+            <SearchBar onSelect={closeMenu} />
+          </div>
+
+          {/* Right side */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-950"
+              className={iconBtn}
             >
-              {theme === "light" ? (
-                <Sun size={20} className="text-yellow-500" strokeWidth={2.5} />
-              ) : (
-                <Moon size={20} className="text-indigo-300" strokeWidth={2.5} />
-              )}
+              {theme === "light" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-950"
               aria-label="Toggle menu"
+              className={`${iconBtn} md:hidden`}
             >
-              <div className="relative w-6 h-6">
-                <Menu size={20} className={`absolute transition-all duration-300 ${menuOpen ? "opacity-0 scale-75" : "opacity-100 scale-100"}`} />
-                <X size={20} className={`absolute transition-all duration-300 ${menuOpen ? "opacity-100 scale-100" : "opacity-0 scale-75"}`} />
-              </div>
+              {menuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Mobile menu */}
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 top-16 z-30 bg-black/20 backdrop-blur-sm md:hidden"
-            onClick={() => setMenuOpen(false)}
-            style={{ animation: "fadeIn 0.2s ease-out" }}
+            className="fixed inset-0 top-16 z-30 bg-black/30 md:hidden"
+            onClick={closeMenu}
           />
 
           <div
-            className="fixed top-16 left-0 right-0 z-30 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700/50 md:hidden"
-            style={{ animation: "slideDown 0.3s ease-out" }}
+            className="fixed top-16 left-0 right-0 z-30 border-b border-gray-200 dark:border-white/10 bg-white dark:bg-gray-950 shadow-lg md:hidden"
+            style={{ animation: "menuDown 0.2s ease-out" }}
           >
-            <div className="w-full px-4 sm:px-6 py-3">
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link, index) => (
-                  link.external ? (
-                    <a
-                      key={link.name}
-                      href={link.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={handleNavClick}
-                      className="px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-200 relative group"
-                      style={{ animation: menuOpen ? `slideIn 0.3s ease-out ${index * 0.05}s both` : "none" }}
-                    >
-                      {link.name}
-                      <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                    </a>
-                  ) : (
-                    <NavLink
-                      key={link.name}
-                      to={link.path}
-                      onClick={handleNavClick}
-                      className={({ isActive }) =>
-                        `px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 relative group ${
-                          isActive
-                            ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                            : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
-                        }`
-                      }
-                      style={{ animation: menuOpen ? `slideIn 0.3s ease-out ${index * 0.05}s both` : "none" }}
-                    >
-                      {link.name}
-                      <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                    </NavLink>
-                  )
-                ))}
-              </div>
+            <div className="flex flex-col gap-1 px-4 sm:px-6 py-3">
+              {navLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.name}
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMenu}
+                    className={`${linkBase} ${linkIdle} flex items-center justify-between px-3 py-3`}
+                  >
+                    {link.name}
+                    <ExternalLink size={14} />
+                  </a>
+                ) : (
+                  <NavLink
+                    key={link.name}
+                    to={link.path}
+                    onClick={closeMenu}
+                    className={({ isActive }) =>
+                      `${linkBase} px-3 py-3 ${isActive ? linkActive : linkIdle}`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                )
+              )}
             </div>
           </div>
         </>
       )}
 
       <style>{`
-        @keyframes slideIn {
+        @keyframes menuDown {
           from { opacity: 0; transform: translateY(-8px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-12px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
         @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
+          * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
       `}</style>
     </>
