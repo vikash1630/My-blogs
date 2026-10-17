@@ -59,11 +59,11 @@ function Contact() {
 
               {/* Email 1 */}
               <a
-                href="mailto:m.vikash1630@gmail.com"
+                href="mailto:mvikash1657@gmail.com"
                 className="inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold px-5 py-3 text-sm transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 📧
-                m.vikash1630@gmail.com
+                mvikash1657@gmail.com
               </a>
 
               {/* Email 2 */}

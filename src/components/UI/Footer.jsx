@@ -35,11 +35,11 @@ const Footer = () => {
               CS undergrad at MGIT, Hyderabad, writing about what I build and break along the way — React, Node, and the odd 2am bug fix.
             </p>
             <a
-              href="mailto:m.vikash1630@gmail.com"
+              href="mailto:mvikash1657@gmail.com"
               className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
             >
               <Mail size={15} strokeWidth={2.5} />
-              m.vikash1630@gmail.com
+              mvikash1657@gmail.com
             </a>
           </div>
 

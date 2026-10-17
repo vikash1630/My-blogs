@@ -1,531 +1,429 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
 import Footer from '../../UI/Footer';
 
-const CONCEPTS = [
-  {
-    id: 1,
-    section: "Day 3",
-    name: "Why OOP for LLD?",
-    hue: "indigo",
-    icon: "🧠",
-    description: "OOP ≠ syntax. It's turning requirements into interacting objects with clear state + behavior + responsibilities.",
-    content: `Requirement
-    ↓
-What THINGS exist?
-    ↓
-Candidate OBJECTS
-    ↓
-What does each object KNOW?
-    ↓
-What can each object DO?
-    ↓
-What RULES does it own?
-    ↓
-RESPONSIBILITIES
-    ↓
-How do objects RELATE?
-    ↓
-Design`,
-    diagram: "Requirement → Objects → State/Behavior → Responsibilities → Relationships",
-    keypoint: "OOP for LLD is about responsibility-driven design."
-  },
-  {
-    id: 2,
-    section: "Day 3",
-    name: "Class & Object",
-    hue: "blue",
-    icon: "🏗️",
-    description: "Class = blueprint. Object = actual instance.",
-    content: `C++:
-class Car {
-public:
-    string brand;
-    void drive() { cout << "Driving"; }
-};
+/* ------------------------------------------------------------------ */
+/*  DATA                                                               */
+/* ------------------------------------------------------------------ */
 
-Car car1;   // object
-Car car2;   // object`,
-    diagram: "CLASS (Car) → car1, car2 (objects)",
-    keypoint: "Classes define structure; objects hold state."
-  },
+const GROUPS = [
   {
-    id: 3,
-    section: "Day 3",
-    name: "Object → Responsibility",
-    hue: "cyan",
-    icon: "🎯",
-    description: "The most important LLD skill: assign responsibilities based on what the object knows and does.",
-    content: `OBJECT
-  ↓
-KNOWS (state) + DOES (actions) + RULES (validity)
-  ↓
-RESPONSIBILITY
+    id: "pillars",
+    title: "The 4 Pillars",
+    intro: "The four ideas every other OOP concept builds on.",
+    accent: "indigo",
+    concepts: [
+      {
+        id: 1,
+        name: "Encapsulation",
+        definition: "Wrapping data and methods together in a class, and restricting direct access to the data.",
+        code: `class BankAccount {
+    private double balance;
 
-Example: Order
-KNOWS: orderId, customerId, items, status
-DOES: changeStatus, cancel, complete
-RESPONSIBLE FOR: maintaining valid order lifecycle`,
-    diagram: "KNOWS → DOES → RULES → RESPONSIBILITY",
-    keypoint: "Who naturally has the information to perform the responsibility?"
-  },
-  {
-    id: 4,
-    section: "Day 3",
-    name: "Encapsulation",
-    hue: "teal",
-    icon: "🔒",
-    description: "Protect internal state and control how it changes.",
-    content: `C++:
-class BankAccount {
-private:
-    double balance = 0;
-public:
-    void deposit(double amount) {
+    public void deposit(double amount) {
         if (amount > 0) balance += amount;
     }
-    double getBalance() const { return balance; }
-};`,
-    diagram: "Object owns state → controls access → enforces rules",
-    keypoint: "Protect the inside; control how it changes."
-  },
-  {
-    id: 5,
-    section: "Day 3",
-    name: "Abstraction",
-    hue: "emerald",
-    icon: "🧠",
-    description: "Hide unnecessary complexity; expose only what the outside needs.",
-    content: `C++:
-class Payment {
-public:
-    void pay() {
-        validate(); process(); sendReceipt();
+
+    public double getBalance() {
+        return balance;
     }
-private:
-    void validate() { /* ... */ }
-    void process() { /* ... */ }
-    void sendReceipt() { /* ... */ }
-};`,
-    diagram: "Complex implementation hidden → expose essential behavior",
-    keypoint: "Abstraction = what to show; encapsulation = how to protect."
-  },
-  {
-    id: 6,
-    section: "Day 3",
-    name: "Inheritance",
-    hue: "lime",
-    icon: "🌳",
-    description: "Specialized class extends a general class (IS-A relationship).",
-    content: `C++:
-class Vehicle {
-public:
-    void start() { cout << "Starting"; }
-};
-class Car : public Vehicle {
-public:
-    void openTrunk() { cout << "Trunk opened"; }
-};`,
-    diagram: "Vehicle ← Car (IS-A)",
-    keypoint: "Use inheritance for genuine IS‑A, not just code reuse."
-  },
-  {
-    id: 7,
-    section: "Day 3",
-    name: "Polymorphism",
-    hue: "rose",
-    icon: "🔥",
-    description: "Same contract, different implementations.",
-    content: `C++:
-class Payment {
-public:
-    virtual void pay() = 0;
-    virtual ~Payment() = default;
-};
-class UPI : public Payment {
-    void pay() override { cout << "UPI payment"; }
-};`,
-    diagram: "Payment (contract) → UPI, Card, Wallet (different behaviors)",
-    keypoint: "Polymorphism = same interface, different runtime behavior."
-  },
-  {
-    id: 8,
-    section: "Day 3",
-    name: "Association",
-    hue: "orange",
-    icon: "🔗",
-    description: "Two objects have a meaningful relationship or interaction.",
-    content: `Example:
-Doctor ───── Patient
-
-C++ concept:
-class Doctor {
-private:
-    Patient* patient;
-};`,
-    diagram: "Doctor ↔ Patient (related/interacts)",
-    keypoint: "Association = related to / interacts with."
-  },
-  {
-    id: 9,
-    section: "Day 3",
-    name: "Aggregation",
-    hue: "amber",
-    icon: "🧩",
-    description: "HAS‑A or groups, but the contained can exist independently.",
-    content: `Team ◇──── Player
-Team destroyed → players can still exist
-
-C++:
-class Team {
-private:
-    vector<Player*> players;
-};`,
-    diagram: "Team ◇── Player (independent lifecycle)",
-    keypoint: "Aggregation = HAS‑A + independent lifecycle."
-  },
-  {
-    id: 10,
-    section: "Day 3",
-    name: "Composition",
-    hue: "red",
-    icon: "💥",
-    description: "Strong ownership; lifecycle of contained is tied to owner.",
-    content: `House
-  ◆──── Room
-House disappears → rooms don't exist meaningfully without it
-
-C++:
-class House {
-private:
-    Room room1;
-    Room room2;
-};`,
-    diagram: "House ◆── Room (tied lifecycle)",
-    keypoint: "Composition = OWNS‑A + lifecycle dependency."
-  },
-  {
-    id: 11,
-    section: "Day 3",
-    name: "Dependency",
-    hue: "fuchsia",
-    icon: "⚡",
-    description: "A temporarily uses B to perform work.",
-    content: `A ───── uses ─────→ B
-
-Example:
-ReportGenerator uses Printer
-
-C++:
-class ReportGenerator {
-public:
-    void generate(Printer& printer);
-};`,
-    diagram: "A → uses → B (temporary)",
-    keypoint: "Dependency = temporarily relies on another."
-  },
-  {
-    id: 12,
-    section: "Day 3",
-    name: "Interface",
-    hue: "purple",
-    icon: "🔌",
-    description: "Contract defining required behavior (WHAT, not HOW).",
-    content: `C++ representation (abstract class with pure virtual):
-class Payment {
-public:
-    virtual void pay() = 0;
-    virtual ~Payment() = default;
-};`,
-    diagram: "Interface → pay() → implemented by UPI, Card, Wallet",
-    keypoint: "Interface = contract for behavior."
-  },
-  {
-    id: 13,
-    section: "Day 3",
-    name: "Abstract Class",
-    hue: "violet",
-    icon: "🧱",
-    description: "Common base with shared state/behavior, leaving some methods to subclasses.",
-    content: `C++:
-class Vehicle {
-public:
-    virtual void move() = 0;   // pure virtual
-    void start() { cout << "Starting"; }
-    virtual ~Vehicle() = default;
-};`,
-    diagram: "Vehicle (abstract) ← Car, Bike",
-    keypoint: "Abstract class = common base + shared implementation."
-  },
-  {
-    id: 14,
-    section: "Day 3",
-    name: "Interface vs Abstract Class",
-    hue: "sky",
-    icon: "⚖️",
-    description: "Interface = contract; Abstract class = common base.",
-    content: `INTERFACE
-→ Contract / capability
-→ WHAT must be provided
-
-ABSTRACT CLASS
-→ Common base
-→ Shared state/behavior possible
-→ WHAT is common + WHAT must vary`,
-    diagram: "Interface = WHAT; Abstract = common + variation",
-    keypoint: "Use interface for capability; abstract class for shared foundation."
-  },
-  {
-    id: 15,
-    section: "Day 3",
-    name: "Composition vs Inheritance",
-    hue: "indigo",
-    icon: "⚔️",
-    description: "IS‑A vs HAS‑A. Prefer composition over inheritance.",
-    content: `Inheritance (IS‑A):
-Vehicle ← Car
-
-Composition (HAS‑A):
-Car
- └── Engine`,
-    diagram: "Inheritance = specialization; Composition = assembly",
-    keypoint: "Prefer composition for flexibility; inheritance for true specialization."
-  },
-  {
-    id: 16,
-    section: "Day 3",
-    name: "Relationship Cheat Sheet",
-    hue: "teal",
-    icon: "📋",
-    description: "Quick reference for object relationships.",
-    content: `Association → Related to / interacts with
-Aggregation → HAS‑A / groups (independent lifecycle)
-Composition → Strong HAS‑A / owns (tied lifecycle)
-Dependency → Temporarily uses`,
-    diagram: "Association ↔ Aggregation ◇ Composition ◆ Dependency →",
-    keypoint: "Know the differences: strength and lifecycle."
-  },
-  {
-    id: 17,
-    section: "Day 3",
-    name: "The Complete Object-Thinking Machine",
-    hue: "emerald",
-    icon: "🧠",
-    description: "Full mental flow for LLD design.",
-    content: `REQUIREMENT
-  ↓
-What THINGS exist? → OBJECTS
-  ↓
-KNOWS (state) + DOES (behavior) + RULES
-  ↓
-RESPONSIBILITY
-  ↓
-Who naturally owns it? → RELATIONSHIPS
-  ↓
-Need abstraction? → Interface / Abstract Class
-  ↓
-Different implementations? → Polymorphism
-  ↓
-Genuine IS‑A? → Inheritance`,
-    diagram: "Requirement → Objects → State/Behavior → Responsibilities → Relationships → Abstraction → Polymorphism → Inheritance",
-    keypoint: "This is the LLD design flow."
-  },
-  {
-    id: 18,
-    section: "Day 3",
-    name: "When You Go Blank About Responsibilities",
-    hue: "amber",
-    icon: "👀",
-    description: "Ask these questions to assign responsibilities.",
-    content: `OBJECT
-  ↓
-What does it KNOW?
-  ↓
-What can it DO?
-  ↓
-What RULES must remain valid?
-  ↓
-What does it OWN?
-  ↓
-What responsibility naturally follows?
-
-Examples: Create, Validate, Calculate, Maintain state, Change state, Enforce rules, Find/retrieve, Coordinate, Perform operation.`,
-    diagram: "KNOWS → DOES → RULES → OWN → RESPONSIBILITY",
-    keypoint: "Which object has the information needed?"
-  },
-  {
-    id: 19,
-    section: "Day 3",
-    name: "Class in 2 Lines",
-    hue: "rose",
-    icon: "❤️‍🔥",
-    description: "Class = meaningful entity/responsibility.",
-    content: `CLASS
-→ Represents a meaningful entity/responsibility.
-
-CLASS contains:
-→ STATE it owns
-→ BEHAVIOR it is responsible for`,
-    diagram: "Class = State + Behavior",
-    keypoint: "Keep it simple."
-  },
-  {
-    id: 20,
-    section: "Day 3",
-    name: "Final LLD Mindset",
-    hue: "fuchsia",
-    icon: "🚀",
-    description: "Don't ask 'which classes?' Ask 'what things exist?'",
-    content: `What things exist?
-  ↓
-What does each one know?
-  ↓
-What does each one do?
-  ↓
-What rules does each own?
-  ↓
-Which object naturally owns this responsibility?
-  ↓
-How are they related?
-  ↓
-Do I need abstraction?
-  ↓
-Do I need a common contract?
-  ↓
-Do different implementations behave differently?
-  ↓
-Is there a genuine IS‑A?
-  ↓
-Inheritance or Composition?`,
-    diagram: "Things → Knows → Does → Rules → Responsibility → Relationships → Abstraction → Contract → Polymorphism → IS‑A → Decision",
-    keypoint: "Always start with the things and their responsibilities."
-  },
-  {
-    id: 21,
-    section: "Day 3",
-    name: "Day 3 — One-Glance Recall",
-    hue: "indigo",
-    icon: "🔥",
-    description: "The entire Day 3 in one flow.",
-    content: `CLASS → OBJECT → KNOWS+DOES+RULES → RESPONSIBILITY → ENCAPSULATION → ABSTRACTION → RELATIONSHIPS (Association, Aggregation, Composition, Dependency) → INTERFACE → ABSTRACT CLASS → POLYMORPHISM → INHERITANCE → COMPOSITION vs INHERITANCE → OBJECT-THINKING FRAMEWORK`,
-    diagram: "Class → Object → Responsibility → Encapsulation → Abstraction → Relationships → Interface → Abstract → Polymorphism → Inheritance → Composition vs Inheritance",
-    keypoint: "This is the complete mental model."
-  }
-];
-
-const HUE_MAP = {
-  blue: { border: "border-blue-200 dark:border-blue-500/25", bg: "bg-blue-50/70 dark:bg-blue-500/[0.06]", text: "text-blue-600 dark:text-blue-300", badge: "bg-blue-500", accent: "text-blue-500 dark:text-blue-400" },
-  cyan: { border: "border-cyan-200 dark:border-cyan-500/25", bg: "bg-cyan-50/70 dark:bg-cyan-500/[0.06]", text: "text-cyan-600 dark:text-cyan-300", badge: "bg-cyan-500", accent: "text-cyan-500 dark:text-cyan-400" },
-  teal: { border: "border-teal-200 dark:border-teal-500/25", bg: "bg-teal-50/70 dark:bg-teal-500/[0.06]", text: "text-teal-600 dark:text-teal-300", badge: "bg-teal-500", accent: "text-teal-500 dark:text-teal-400" },
-  emerald: { border: "border-emerald-200 dark:border-emerald-500/25", bg: "bg-emerald-50/70 dark:bg-emerald-500/[0.06]", text: "text-emerald-600 dark:text-emerald-300", badge: "bg-emerald-500", accent: "text-emerald-500 dark:text-emerald-400" },
-  lime: { border: "border-lime-200 dark:border-lime-500/25", bg: "bg-lime-50/70 dark:bg-lime-500/[0.06]", text: "text-lime-700 dark:text-lime-300", badge: "bg-lime-500", accent: "text-lime-600 dark:text-lime-400" },
-  green: { border: "border-green-200 dark:border-green-500/25", bg: "bg-green-50/70 dark:bg-green-500/[0.06]", text: "text-green-600 dark:text-green-300", badge: "bg-green-500", accent: "text-green-500 dark:text-green-400" },
-  sky: { border: "border-sky-200 dark:border-sky-500/25", bg: "bg-sky-50/70 dark:bg-sky-500/[0.06]", text: "text-sky-600 dark:text-sky-300", badge: "bg-sky-500", accent: "text-sky-500 dark:text-sky-400" },
-  indigo: { border: "border-indigo-200 dark:border-indigo-500/25", bg: "bg-indigo-50/70 dark:bg-indigo-500/[0.06]", text: "text-indigo-600 dark:text-indigo-300", badge: "bg-indigo-500", accent: "text-indigo-500 dark:text-indigo-400" },
-  violet: { border: "border-violet-200 dark:border-violet-500/25", bg: "bg-violet-50/70 dark:bg-violet-500/[0.06]", text: "text-violet-600 dark:text-violet-300", badge: "bg-violet-500", accent: "text-violet-500 dark:text-violet-400" },
-  purple: { border: "border-purple-200 dark:border-purple-500/25", bg: "bg-purple-50/70 dark:bg-purple-500/[0.06]", text: "text-purple-600 dark:text-purple-300", badge: "bg-purple-500", accent: "text-purple-500 dark:text-purple-400" },
-  pink: { border: "border-pink-200 dark:border-pink-500/25", bg: "bg-pink-50/70 dark:bg-pink-500/[0.06]", text: "text-pink-600 dark:text-pink-300", badge: "bg-pink-500", accent: "text-pink-500 dark:text-pink-400" },
-  rose: { border: "border-rose-200 dark:border-rose-500/25", bg: "bg-rose-50/70 dark:bg-rose-500/[0.06]", text: "text-rose-600 dark:text-rose-300", badge: "bg-rose-500", accent: "text-rose-500 dark:text-rose-400" },
-  red: { border: "border-red-200 dark:border-red-500/25", bg: "bg-red-50/70 dark:bg-red-500/[0.06]", text: "text-red-600 dark:text-red-300", badge: "bg-red-500", accent: "text-red-500 dark:text-red-400" },
-  orange: { border: "border-orange-200 dark:border-orange-500/25", bg: "bg-orange-50/70 dark:bg-orange-500/[0.06]", text: "text-orange-600 dark:text-orange-300", badge: "bg-orange-500", accent: "text-orange-500 dark:text-orange-400" },
-  amber: { border: "border-amber-200 dark:border-amber-500/25", bg: "bg-amber-50/70 dark:bg-amber-500/[0.06]", text: "text-amber-600 dark:text-amber-300", badge: "bg-amber-500", accent: "text-amber-500 dark:text-amber-400" },
-  fuchsia: { border: "border-fuchsia-200 dark:border-fuchsia-500/25", bg: "bg-fuchsia-50/70 dark:bg-fuchsia-500/[0.06]", text: "text-fuchsia-600 dark:text-fuchsia-300", badge: "bg-fuchsia-500", accent: "text-fuchsia-500 dark:text-fuchsia-400" },
-};
-
-function useRevealOnScroll() {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
+}`,
+        keypoint: "Make fields private, expose them through public methods.",
       },
-      { threshold: 0.01, rootMargin: "0px 0px -10px 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, visible];
+      {
+        id: 2,
+        name: "Abstraction",
+        definition: "Hiding implementation details and showing only what is essential.",
+        code: `abstract class Shape {
+    abstract double area();   // what, not how
 }
 
-function ConceptCard({ concept }) {
-  const h = HUE_MAP[concept.hue];
-  const [ref, visible] = useRevealOnScroll();
+class Circle extends Shape {
+    double r = 5;
+    double area() { return Math.PI * r * r; }
+}`,
+        keypoint: "Abstraction is about what an object does, not how it does it.",
+      },
+      {
+        id: 3,
+        name: "Inheritance",
+        definition: "A child class acquiring the fields and methods of a parent class using `extends`.",
+        code: `class Animal {
+    void eat() { System.out.println("Eating"); }
+}
+
+class Dog extends Animal {
+    void bark() { System.out.println("Barking"); }
+}
+
+// Dog d = new Dog();
+// d.eat();  d.bark();`,
+        keypoint: "Java supports single inheritance for classes; multiple only through interfaces.",
+      },
+      {
+        id: 4,
+        name: "Polymorphism",
+        definition: "One method name behaving differently depending on context: overloading (compile-time) and overriding (runtime).",
+        code: `// Compile-time: overloading
+int add(int a, int b)          { return a + b; }
+double add(double a, double b) { return a + b; }
+
+// Runtime: overriding
+class Animal {
+    void sound() { System.out.println("Some sound"); }
+}
+class Cat extends Animal {
+    @Override
+    void sound() { System.out.println("Meow"); }
+}
+
+Animal a = new Cat();
+a.sound();   // Meow`,
+        keypoint: "The reference type decides what is accessible; the actual object decides which method runs.",
+      },
+    ],
+  },
+  {
+    id: "blocks",
+    title: "Core Building Blocks",
+    intro: "The language features used to put the pillars into practice.",
+    accent: "teal",
+    concepts: [
+      {
+        id: 5,
+        name: "Class & Object",
+        definition: "A class is a blueprint that defines fields and methods. An object is an instance of that class, created using `new`.",
+        code: `class Car {
+    String brand;
+    void drive() { System.out.println("Driving"); }
+}
+
+Car c1 = new Car();   // object
+Car c2 = new Car();   // another object`,
+        keypoint: "One class, many objects, each with its own state.",
+      },
+      {
+        id: 6,
+        name: "Constructor",
+        definition: "A special method with the same name as the class, called automatically when an object is created, used to initialize it.",
+        code: `class Car {
+    String brand;
+
+    Car(String brand) {
+        this.brand = brand;
+    }
+}
+
+Car c = new Car("Toyota");`,
+        keypoint: "Java has no destructor; the garbage collector reclaims memory automatically.",
+      },
+      {
+        id: 7,
+        name: "Access Modifiers",
+        definition: "Keywords that control who can access a class, field, or method: `private`, default, `protected`, `public`.",
+        table: {
+          head: ["Modifier", "Same class", "Same package", "Subclass", "Everywhere"],
+          rows: [
+            ["`private`", "✅", "❌", "❌", "❌"],
+            ["default", "✅", "✅", "❌", "❌"],
+            ["`protected`", "✅", "✅", "✅", "❌"],
+            ["`public`", "✅", "✅", "✅", "✅"],
+          ],
+        },
+        keypoint: "Use the most restrictive modifier that works.",
+      },
+      {
+        id: 8,
+        name: "Abstract Class",
+        definition: "A class declared with `abstract` that cannot be instantiated and can have both abstract and concrete methods.",
+        code: `abstract class Vehicle {
+    void start() { System.out.println("Starting"); }
+    abstract void move();
+}
+
+class Bike extends Vehicle {
+    void move() { System.out.println("Bike moves"); }
+}`,
+        keypoint: "Use it when related subclasses share common state or behavior.",
+      },
+      {
+        id: 9,
+        name: "Interface",
+        definition: "A contract of methods that a class must implement using `implements`.",
+        code: `interface Payment {
+    void pay(double amount);
+}
+
+class UPI implements Payment {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " via UPI");
+    }
+}`,
+        keypoint: "An interface defines what a class can do. A class can implement many.",
+      },
+      {
+        id: 10,
+        name: "Abstract Class vs Interface",
+        definition: "An abstract class is for related classes sharing common code (single inheritance). An interface is for unrelated classes sharing a capability (multiple inheritance).",
+        table: {
+          head: ["", "Abstract Class", "Interface"],
+          rows: [
+            ["Keyword", "`extends`", "`implements`"],
+            ["Inheritance", "Only one", "Multiple"],
+            ["Fields", "Any type", "Only constants (`public static final`)"],
+            ["Constructor", "Yes", "No"],
+            ["Use when", "Related classes share code", "Unrelated classes share a capability"],
+          ],
+        },
+        keypoint: "Need shared code? Abstract class. Need a capability? Interface.",
+      },
+      {
+        id: 11,
+        name: "Method Overloading vs Overriding",
+        definition: "Overloading is the same method name with different parameters in the same class. Overriding is a subclass redefining a parent method with the same signature.",
+        code: `// Overloading: same class, different parameters
+int add(int a, int b)          { return a + b; }
+double add(double a, double b) { return a + b; }
+
+// Overriding: parent and child, same signature
+class Animal { void sound() { } }
+
+class Dog extends Animal {
+    @Override
+    void sound() { System.out.println("Bark"); }
+}`,
+        keypoint: "Overloading = same class, different parameters. Overriding = parent and child, same signature.",
+      },
+    ],
+  },
+  {
+    id: "relationships",
+    title: "Relationships",
+    intro: "How classes connect to each other, from the weakest link to the strongest.",
+    accent: "amber",
+    concepts: [
+      {
+        id: 12,
+        name: "Association",
+        definition: "A relationship where two classes know and interact with each other, but neither owns the other.",
+        code: `class Patient { String name; }
+
+class Doctor {
+    Patient patient;                 // knows a patient
+
+    void assign(Patient p) {
+        this.patient = p;
+    }
+}`,
+        keypoint: "Both objects live independently; they just know each other.",
+      },
+      {
+        id: 13,
+        name: "Aggregation",
+        definition: "A HAS-A relationship where the part can exist independently of the whole.",
+        code: `class Team {
+    private List<Player> players;
+
+    Team(List<Player> players) {     // players created outside
+        this.players = players;
+    }
+}`,
+        keypoint: "Weak ownership, independent lifecycle. Players survive if the team is deleted.",
+      },
+      {
+        id: 14,
+        name: "Composition",
+        definition: "A strong HAS-A relationship where the part cannot exist without the whole.",
+        code: `class House {
+    private final Room room = new Room();   // created and owned by House
+}`,
+        keypoint: "Strong ownership, dependent lifecycle. Destroy the house and the rooms go with it.",
+      },
+      {
+        id: 15,
+        name: "Dependency",
+        definition: "A class temporarily using another class, usually as a method parameter.",
+        code: `class ReportGenerator {
+    void generate(Printer printer) {   // no field stored
+        printer.print();
+    }
+}`,
+        keypoint: "The weakest relationship: the other class is used, never stored.",
+      },
+    ],
+  },
+];
+
+const LADDER = [
+  { name: "Dependency", note: "uses temporarily" },
+  { name: "Association", note: "knows" },
+  { name: "Aggregation", note: "has, independent" },
+  { name: "Composition", note: "owns, dependent" },
+];
+
+/* Static class strings so Tailwind can see every one of them */
+const ACCENTS = {
+  indigo: {
+    bar: "bg-indigo-500",
+    badge: "bg-indigo-600 dark:bg-indigo-500 text-white",
+    text: "text-indigo-700 dark:text-indigo-300",
+    key: "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10",
+    chip: "hover:border-indigo-400 hover:text-indigo-700 dark:hover:border-indigo-400/60 dark:hover:text-indigo-300",
+  },
+  teal: {
+    bar: "bg-teal-500",
+    badge: "bg-teal-700 dark:bg-teal-500 text-white dark:text-gray-950",
+    text: "text-teal-700 dark:text-teal-300",
+    key: "border-teal-500 bg-teal-50 dark:bg-teal-500/10",
+    chip: "hover:border-teal-400 hover:text-teal-700 dark:hover:border-teal-400/60 dark:hover:text-teal-300",
+  },
+  amber: {
+    bar: "bg-amber-500",
+    badge: "bg-amber-700 dark:bg-amber-500 text-white dark:text-gray-950",
+    text: "text-amber-700 dark:text-amber-300",
+    key: "border-amber-500 bg-amber-50 dark:bg-amber-500/10",
+    chip: "hover:border-amber-400 hover:text-amber-700 dark:hover:border-amber-400/60 dark:hover:text-amber-300",
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/*  SMALL HELPERS                                                      */
+/* ------------------------------------------------------------------ */
+
+// Lightweight Java highlighter: comments, strings, annotations, keywords, numbers
+const TOKEN =
+  /(\/\/.*$)|("(?:[^"\\]|\\.)*")|(@\w+)|\b(class|abstract|interface|extends|implements|private|public|protected|static|final|void|new|return|if|int|double|String|List|this|boolean)\b|\b(\d+(?:\.\d+)?)\b/gm;
+
+const TOKEN_CLASS = [
+  null,
+  "italic text-gray-400 dark:text-gray-500",        // comment
+  "text-emerald-700 dark:text-emerald-300",          // string
+  "text-amber-700 dark:text-amber-300",              // annotation
+  "font-semibold text-violet-700 dark:text-violet-300", // keyword
+  "text-sky-700 dark:text-sky-300",                  // number
+];
+
+function CodeBlock({ code }) {
+  const parts = [];
+  let last = 0;
+  for (const m of code.matchAll(TOKEN)) {
+    if (m.index > last) parts.push(code.slice(last, m.index));
+    const group = [1, 2, 3, 4, 5].find((i) => m[i] !== undefined);
+    parts.push(
+      <span key={m.index} className={TOKEN_CLASS[group]}>
+        {m[0]}
+      </span>
+    );
+    last = m.index + m[0].length;
+  }
+  parts.push(code.slice(last));
 
   return (
-    <div
-      ref={ref}
-      className={`rounded-3xl border ${h.border} ${h.bg} p-7 sm:p-9 transition-all duration-300 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
-    >
-      {/* header */}
-      <div className="flex items-start justify-between gap-4 mb-6">
-        <div className="flex items-center gap-4">
-          <span
-            className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl ${h.badge} text-base font-bold text-white shadow-sm`}
-          >
-            {concept.id}
-          </span>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white leading-snug">
-            {concept.name}
-          </h3>
-        </div>
-      </div>
+    <pre className="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/40 px-5 py-4 text-[13px] sm:text-sm leading-relaxed font-mono text-gray-800 dark:text-gray-200">
+      <code>{parts}</code>
+    </pre>
+  );
+}
 
-      {/* Description */}
-      <div className="mb-6">
-        <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {concept.description}
-        </p>
-      </div>
+// Renders `inline code` inside plain strings
+function Inline({ text }) {
+  return text.split("`").map((chunk, i) =>
+    i % 2 === 1 ? (
+      <code
+        key={i}
+        className="rounded-md bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 font-mono text-[0.88em] text-gray-900 dark:text-gray-100"
+      >
+        {chunk}
+      </code>
+    ) : (
+      <span key={i}>{chunk}</span>
+    )
+  );
+}
 
-      {/* Content (code/notes) */}
-      <div className="mb-6 rounded-2xl bg-white dark:bg-white/5 px-6 py-5 shadow-sm">
-        <pre className="text-base leading-relaxed whitespace-pre-wrap text-gray-700 dark:text-gray-300 font-mono text-sm">
-          {concept.content}
-        </pre>
-      </div>
-
-      {/* diagram */}
-      {concept.diagram && (
-        <pre className="mb-6 overflow-x-auto rounded-xl bg-gray-900 dark:bg-black/40 px-6 py-5 text-sm sm:text-base leading-relaxed text-emerald-300 font-mono">
-          {concept.diagram}
-        </pre>
-      )}
-
-      {/* key takeaway */}
-      {concept.keypoint && (
-        <div className="flex items-start gap-3 rounded-xl bg-white dark:bg-white/5 px-5 py-4 shadow-sm">
-          <span className="text-lg flex-shrink-0">🔑</span>
-          <p className="text-lg font-semibold text-gray-800 dark:text-gray-200 leading-relaxed">{concept.keypoint}</p>
-        </div>
-      )}
+function DataTable({ head, rows }) {
+  return (
+    <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-white/10">
+      <table className="w-full min-w-[480px] text-left text-sm sm:text-base">
+        <thead className="bg-gray-50 dark:bg-white/5">
+          <tr>
+            {head.map((h, i) => (
+              <th
+                key={i}
+                className="px-4 py-3 font-bold text-gray-900 dark:text-white whitespace-nowrap"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-100 dark:divide-white/10">
+          {rows.map((row, r) => (
+            <tr key={r}>
+              {row.map((cell, c) => (
+                <td
+                  key={c}
+                  className={`px-4 py-3 ${
+                    c === 0
+                      ? "font-semibold text-gray-900 dark:text-white"
+                      : "text-gray-700 dark:text-gray-300"
+                  }`}
+                >
+                  <Inline text={cell} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-function RevealSection({ children, className = "" }) {
-  const [ref, visible] = useRevealOnScroll();
+function Concept({ concept, accent }) {
+  const a = ACCENTS[accent];
   return (
-    <section
-      ref={ref}
-      className={`transition-all duration-300 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      } ${className}`}
-    >
-      {children}
-    </section>
+    <article className="py-10 first:pt-2 border-t border-gray-100 dark:border-white/10 first:border-t-0">
+      <div className="flex items-center gap-4 mb-4">
+        <span
+          className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl text-base font-bold ${a.badge}`}
+        >
+          {concept.id}
+        </span>
+        <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white leading-snug">
+          {concept.name}
+        </h3>
+      </div>
+
+      <p className="text-lg sm:text-xl leading-relaxed text-gray-800 dark:text-gray-200 mb-6">
+        <Inline text={concept.definition} />
+      </p>
+
+      {concept.code && (
+        <div className="mb-6">
+          <CodeBlock code={concept.code} />
+        </div>
+      )}
+
+      {concept.table && (
+        <div className="mb-6">
+          <DataTable head={concept.table.head} rows={concept.table.rows} />
+        </div>
+      )}
+
+      <div className={`rounded-r-xl border-l-4 px-5 py-4 ${a.key}`}>
+        <p className="text-base sm:text-lg font-semibold leading-relaxed text-gray-900 dark:text-gray-100">
+          {concept.keypoint}
+        </p>
+      </div>
+    </article>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  PAGE                                                               */
+/* ------------------------------------------------------------------ */
 
 const OOP1 = () => {
   const [progress, setProgress] = useState(0);
@@ -554,8 +452,6 @@ const OOP1 = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const concepts = CONCEPTS; // all are Day 3
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-gray-950 transition-colors duration-500">
@@ -591,99 +487,100 @@ const OOP1 = () => {
 
       {/* Page header */}
       <div className="w-full border-b border-gray-100 dark:border-white/10">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8 py-10 sm:py-14 flex items-start justify-between gap-6">
-          <div>
-            <Link
-              to="/blogs"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-mono text-sm font-bold px-5 py-2.5 shadow-lg hover:from-indigo-500 hover:to-purple-500 transition-all mb-6"
-            >
-              <span className="text-base">←</span>
-              <span className="hidden sm:inline">Back to Blogs</span>
-              <span className="sm:hidden">Blogs</span>
-            </Link>
+        <div className="mx-auto max-w-3xl px-5 sm:px-8 py-10 sm:py-14">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <Link
+                to="/blogs"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-mono text-sm font-bold px-5 py-2.5 shadow-lg hover:from-indigo-500 hover:to-purple-500 transition-all mb-6"
+              >
+                <span className="text-base">←</span>
+                <span className="hidden sm:inline">Back to Blogs</span>
+                <span className="sm:hidden">Blogs</span>
+              </Link>
 
-            <p className="text-sm font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
-              🧠 Object Oriented Programming
-            </p>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-              OOP + Object Thinking
-            </h1>
-            <p className="mt-3 text-lg sm:text-xl text-gray-500 dark:text-gray-400">
-              LLD Master Revision Sheet
-            </p>
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                Core OOP Concepts
+              </h1>
+              <p className="mt-3 text-lg sm:text-xl text-gray-500 dark:text-gray-400">
+                Definitions, short Java examples, and one key point for each.
+              </p>
+            </div>
+
+            <a
+              href="#"
+              className="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-5 py-3 text-sm sm:text-base font-bold text-white dark:text-gray-900 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+            >
+              <Download size={18} strokeWidth={2.5} />
+              <span className="hidden sm:inline">Download</span>
+            </a>
           </div>
-          {/* Optional download if you have a PDF; we can skip or keep generic */}
-          <a
-            href="#"
-            className="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-5 py-3 text-sm sm:text-base font-bold text-white dark:text-gray-900 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
-          >
-            <Download size={18} strokeWidth={2.5} />
-            <span className="hidden sm:inline">Download</span>
-          </a>
+
+          {/* jump links */}
+          <nav className="mt-8 flex flex-wrap gap-2" aria-label="Jump to section">
+            {GROUPS.map((g) => (
+              <a
+                key={g.id}
+                href={`#${g.id}`}
+                className={`rounded-full border border-gray-200 dark:border-white/15 px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 transition-colors ${ACCENTS[g.accent].chip}`}
+              >
+                {g.title}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
 
       <main className="mx-auto max-w-3xl px-5 sm:px-8 py-14 sm:py-16">
-        {/* Intro */}
-        <RevealSection className="mb-16 rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-600 p-8 sm:p-10 text-white">
-          <p className="text-sm font-bold uppercase tracking-widest text-white/70 mb-3">
-            The core principle
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold leading-snug mb-6">
-            Turn requirements into interacting objects.
-          </h2>
-          <p className="text-lg text-white/90 font-semibold">
-            OOP for LLD is about responsibility-driven design — identify things, their state, behavior, rules, relationships, and abstractions.
-          </p>
-        </RevealSection>
+        {GROUPS.map((g) => {
+          const a = ACCENTS[g.accent];
+          return (
+            <section key={g.id} id={g.id} className="scroll-mt-6 mb-20">
+              <div className="mb-8 flex items-stretch gap-4">
+                <span className={`w-1.5 rounded-full ${a.bar}`} aria-hidden="true" />
+                <div>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                    {g.title}
+                  </h2>
+                  <p className="mt-1 text-base sm:text-lg text-gray-500 dark:text-gray-400">
+                    {g.intro}
+                  </p>
+                </div>
+              </div>
 
-        {/* All concepts */}
-        <RevealSection className="mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-10">
-            OOP + Object Thinking
-          </h2>
-          <div className="flex flex-col gap-10">
-            {concepts.map((concept) => (
-              <ConceptCard key={concept.id} concept={concept} />
-            ))}
-          </div>
-        </RevealSection>
+              {g.concepts.map((c) => (
+                <Concept key={c.id} concept={c} accent={g.accent} />
+              ))}
 
-        {/* Final Recap */}
-        <RevealSection className="mt-16 rounded-3xl border-2 border-dashed border-orange-200 dark:border-orange-500/30 bg-orange-50/40 dark:bg-orange-500/[0.04] p-8 sm:p-10 mb-16">
-          <div className="mb-6 flex items-center gap-3">
-            <span className="text-3xl">🧭</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">
-              The LLD Mindset
-            </h2>
-          </div>
-          <div className="space-y-4">
-            <p className="text-gray-700 dark:text-gray-300 font-mono text-sm">
-              Requirement → Things → KNOWS + DOES + RULES → Responsibility → Relationships → Abstraction → Polymorphism → Inheritance/Composition
-            </p>
-            <div className="bg-gray-100 dark:bg-black/30 p-4 rounded-lg">
-              <p className="font-bold text-gray-900 dark:text-white mb-2">Always ask:</p>
-              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
-                <li>Which object has the information needed for this responsibility?</li>
-                <li>Is this a genuine IS‑A or a HAS‑A?</li>
-                <li>What contract should implementations follow?</li>
-                <li>What are the trade‑offs?</li>
-              </ul>
-            </div>
-          </div>
-        </RevealSection>
-
-        {/* Golden Rule */}
-        <RevealSection className="rounded-3xl bg-gray-900 dark:bg-white/5 p-10 sm:p-14 text-white border border-white/10 text-center">
-          <span className="text-4xl">❤️‍🔥</span>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-extrabold">The Golden Rule</h2>
-          <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-white/80 leading-relaxed">
-            Don't ask "which classes?" — ask <span className="font-bold text-white">"what things exist, what do they know, what do they do, and what rules do they own?"</span>
-          </p>
-          <p className="mt-8 text-base font-bold tracking-wide text-white/70">
-            Responsibilities drive the design.
-          </p>
-        </RevealSection>
+              {g.id === "relationships" && (
+                <div className="mt-6 rounded-2xl border border-gray-200 dark:border-white/10 p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                    Relationship strength
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 mb-6">Weakest to strongest.</p>
+                  <ol className="grid gap-3 sm:grid-cols-4">
+                    {LADDER.map((item, i) => (
+                      <li
+                        key={item.name}
+                        className={`rounded-xl px-4 py-4 ${
+                          [
+                            "bg-amber-50 dark:bg-amber-500/[0.06]",
+                            "bg-amber-100/80 dark:bg-amber-500/10",
+                            "bg-amber-200/70 dark:bg-amber-500/20",
+                            "bg-amber-300/70 dark:bg-amber-500/30",
+                          ][i]
+                        }`}
+                      >
+                        <p className="font-bold text-gray-900 dark:text-white">{item.name}</p>
+                        <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">{item.note}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+            </section>
+          );
+        })}
       </main>
 
       <Footer />
