@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 
 const navLinks = [
-  { name: "Blogs", path: "/blogs" },
+  { name: "Home", path: "/" },
+  { name: "All Blogs", path: "/blogs" },
   { name: "About Me", path: "/about" },
   { name: "Contact", path: "/contact" },
   {
@@ -41,7 +42,7 @@ const Navbar = () => {
     "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5";
 
   const iconBtn =
-    "flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
+    "flex h-9 w-9 items-center cursor-pointer justify-center rounded-lg border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500";
 
   return (
     <>
@@ -91,7 +92,7 @@ const Navbar = () => {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2 flex-shrink-0 ">
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"

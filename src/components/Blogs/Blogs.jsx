@@ -13,6 +13,11 @@ function Blogs() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       <div className="w-full px-4 sm:px-6 lg:px-10 py-12">
+        {/* Page Title */}
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white tracking-tight text-center mb-10">
+          All Blogs
+        </h1>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <Link
