@@ -82,7 +82,7 @@ const SearchBar = ({ onSelect }) => {
               setOpen(false);
             }}
             aria-label="Clear search"
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 dark:hover:text-white"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 dark:hover:text-white cursor-pointer"
           >
             <X size={16} />
           </button>

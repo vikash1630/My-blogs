@@ -30,9 +30,11 @@ function About() {
             </h2>
 
             <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              C, C++, Java, Python, JavaScript, React.js, Node.js, Express.js,
-              Flask, MongoDB, MySQL, Tailwind CSS, Pandas, NumPy, Matplotlib,
-              Git, GitHub, REST APIs, Socket.IO, JWT
+              C, C++, Java, Python, JavaScript, HTML, CSS, React.js, Tailwind CSS,
+              Bootstrap, Vite, Node.js, Express.js, Flask, MongoDB, MySQL, SQLite,
+              REST APIs, WebSockets, Socket.IO, JWT, Stripe, Cloudinary, Pandas, NumPy,
+              Scikit-learn, Matplotlib, Seaborn, Tableau, DSA, System Design, Git,
+              GitHub, Postman, Vercel, Render
             </p>
           </div>
 
@@ -47,7 +49,7 @@ function About() {
                   href="https://rail-pulse-5t74.vercel.app/"
                   className="font-semibold hover:underline text-gray-900 dark:text-white"
                 >
-                  Rail Pulse
+                  Rail Pulse ↗️
                 </a>{" "}
                 — Flask, React.js, Pandas
               </li>
@@ -58,27 +60,27 @@ function About() {
                   rel="noopener noreferrer"
                   className="font-semibold hover:underline text-gray-900 dark:text-white"
                 >
-                  Local Lynk
+                  Local Lynk ↗️
                 </a>{" "}
                 — React, Node.js, MongoDB, Socket.IO, JWT
               </li>
-              
+
               <li>
                 <a
                   href="https://frontendhackathon-olive.vercel.app/"
                   className="font-semibold hover:underline text-gray-900 dark:text-white"
                 >
-                  Churn Score Analytics Dashboard
+                  Churn Score Analytics Dashboard ↗️
                 </a>{" "}
                 —  Node.js, Express.js,  React.js
               </li>
-              
+
               <li>
                 <a
                   href="https://solo-levelling-fitness-model-app.onrender.com/"
                   className="font-semibold hover:underline text-gray-900 dark:text-white"
                 >
-                  Solo Leveling Fitness App
+                  Solo Leveling Fitness App ↗️
                 </a>{" "}
                 — Node.js, Express.js, MongoDB, SSR
               </li>
