@@ -89,5 +89,33 @@
     "category": "System Design",
     "description": "Master caching and asynchronous system design: cache hits and misses, invalidation, TTL, cache stampede, request coalescing, timeouts, backpressure, fail-fast, queues, workers, acknowledgements, retries, idempotency, transactional outbox, dead letter queues, worker scaling, and system monitoring.",
     "image": "/SD5.png"
+  },
+  {
+    "id": "ML-FeatureEngineering-1",
+    "title": "Feature Engineering Part 1 : Basics to Pipelines",
+    "category": "Machine Learning",
+    "description": "Learn Machine Learning fundamentals, the ML lifecycle, tensors, feature engineering, standardization vs normalization, categorical encoding, fit vs transform, ColumnTransformer, and ML pipelines with practical Scikit-learn code.",
+    "image": "/ML1.png"
+  },
+  {
+    "id": "ML-FeatureEngineering-2",
+    "title": "Feature Engineering Part 2 : Transformers, Binning & Date-Time Features",
+    "category": "Machine Learning",
+    "description": "Learn FunctionTransformer, StandardScaler vs FunctionTransformer, PowerTransformer, Box-Cox vs Yeo-Johnson, binning, binarization, handling mixed variables, and extracting useful date-time features with practical Scikit-learn code.",
+    "image": "/ML2.png"
+  },
+  {
+    "id": "ML-FeatureEngineering-3",
+    "title": "Feature Engineering Part 3 : Handling Missing Data",
+    "category": "Machine Learning",
+    "description": "Learn Complete Case Analysis (CCA), numerical and categorical imputation, random sample imputation, missing indicators, KNN Imputer, and MICE (Iterative Imputer) with practical Scikit-learn code.",
+    "image": "/ML3.png"
+  },
+  {
+    "id": "ML-FeatureEngineering-4",
+    "title": "Feature Engineering Part 4 : Outlier Detection & Treatment",
+    "category": "Machine Learning",
+    "description": "Learn about outliers, their impact on machine learning models, and how to detect and treat them using the Z-score method, IQR method, percentile method, trimming, capping, and winsorization with practical Python code.",
+    "image": "/ML4.png"
   }
 ]

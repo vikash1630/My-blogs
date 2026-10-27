@@ -73,5 +73,33 @@
       "Idempotency",
       "Parking Lot LLD"
     ]
+  },
+  {
+    "category": "Machine Learning",
+    "description": "Learn feature engineering from fundamentals to advanced techniques, including scaling, categorical encoding, transformers, binning, date-time features, missing value imputation, and outlier detection and treatment.",
+    "topics": [
+      "Feature Engineering Basics",
+      "Standardization vs Normalization",
+      "Categorical Encoding",
+      "Fit vs Transform",
+      "ColumnTransformer & Pipelines",
+      "FunctionTransformer",
+      "PowerTransformer",
+      "Box-Cox vs Yeo-Johnson",
+      "Binning & Binarization",
+      "Date-Time Features",
+      "Complete Case Analysis (CCA)",
+      "Numerical & Categorical Imputation",
+      "Random Sample Imputation",
+      "Missing Indicators",
+      "KNN Imputer",
+      "MICE (Iterative Imputer)",
+      "Outlier Detection",
+      "Z-score Method",
+      "IQR Method",
+      "Percentile Method",
+      "Trimming & Capping",
+      "Winsorization"
+    ]
   }
 ]
