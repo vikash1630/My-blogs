@@ -117,5 +117,33 @@
     "category": "Machine Learning",
     "description": "Learn about outliers, their impact on machine learning models, and how to detect and treat them using the Z-score method, IQR method, percentile method, trimming, capping, and winsorization with practical Python code.",
     "image": "/ML4.png"
+  },
+  {
+    "id": "ML-LinearAndMultipleRegression-1",
+    "title": "Regression Part 1 : Linear & Multiple Linear Regression",
+    "category": "Machine Learning",
+    "description": "Learn how Simple and Multiple Linear Regression predict a number from one or more input columns using the Least Squares method, and how to evaluate the model with MAE, MSE, RMSE, R² and Adjusted R² using practical Python code.",
+    "image": "/ML5.png"
+  },
+  {
+    "id": "ML-GradientDecent-1",
+    "title": "Regression Part 2 : Batch, Stochastic & Mini-Batch Gradient Descent",
+    "category": "Machine Learning",
+    "description": "Learn how Gradient Descent finds the best m and b step by step, and how Batch, Stochastic (SGD) and Mini-Batch Gradient Descent differ in speed and stability, with the loss formulas and practical Python code for each.",
+    "image": "/ML6.png"
+  },
+  {
+    "id": "ML-PolynomialRegression-1",
+    "title": "Regression Part 3 : Polynomial Regression & Bias-Variance Trade-off",
+    "category": "Machine Learning",
+    "description": "Learn how Polynomial Regression fits a curve by adding powers of the input, how to choose the degree, and how Bias, Variance and Noise explain underfitting and overfitting, with practical Python code.",
+    "image": "/ML7.png"
+  },
+  {
+    "id": "ML-PolynomialRegression-2",
+    "title": "Regression Part 4 : Ridge, Lasso & ElasticNet Regression",
+    "category": "Machine Learning",
+    "description": "Learn how Ridge (L2), Lasso (L1) and ElasticNet regularization punish big coefficients to control overfitting, how alpha and l1_ratio work, and how to choose them with cross-validation using practical Python code.",
+    "image": "/ML8.png"
   }
 ]

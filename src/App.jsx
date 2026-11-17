@@ -25,10 +25,14 @@ import SystemDesign3 from "./components/Blogs/SystemDesign/SystemDesign3";
 import ScrollToTop from "./components/UI/ScrollToTop";
 import SystemDesign4 from "./components/Blogs/SystemDesign/SystemDesign4";
 import SystemDesign5 from "./components/Blogs/SystemDesign/SystemDesign5";
-import BasicsToPipelinesPart1 from "./components/Blogs/MachineLearning/BasicsToPipelinesPart1";
-import TransformersPart2 from "./components/Blogs/MachineLearning/TransformersPart2";
-import MissingValuesPart3 from "./components/Blogs/MachineLearning/MissingValuesPart3";
-import OutliersPart4 from "./components/Blogs/MachineLearning/OutliersPart4";
+import BasicsToPipelinesPart1 from "./components/Blogs/MachineLearning/FeatureEngineering/BasicsToPipelinesPart1";
+import TransformersPart2 from "./components/Blogs/MachineLearning/FeatureEngineering/TransformersPart2";
+import MissingValuesPart3 from "./components/Blogs/MachineLearning/FeatureEngineering/MissingValuesPart3";
+import OutliersPart4 from "./components/Blogs/MachineLearning/FeatureEngineering/OutliersPart4";
+import LinearAndMultipleRegression from "./components/Blogs/MachineLearning/LinearRegression/LinearAndMultipleRegression";
+import BatchAndStochoisticAndMiniBatch from "./components/Blogs/MachineLearning/GradientDecent/BatchAndStochoisticAndMiniBatch";
+import PolynomialRegressionAndTradeOffs from "./components/Blogs/MachineLearning/PolynomialRegression/PolynomialRegressionAndTradeOffs";
+import OtherRegressions from "./components/Blogs/MachineLearning/PolynomialRegression/OtherRegressions";
 
 function App() {
   return (
@@ -47,10 +51,21 @@ function App() {
         <Route path="/blogs/dsa-cheatsheet" element={<DsaCheatSheet />} />
 
         {/* Machine Learning */}
+        {/* Feature Engineering */}
         <Route path="/blogs/ML-FeatureEngineering-1" element={<BasicsToPipelinesPart1 />} />
         <Route path="/blogs/ML-FeatureEngineering-2" element={<TransformersPart2 />} />
         <Route path="/blogs/ML-FeatureEngineering-3" element={<MissingValuesPart3 />} />
         <Route path="/blogs/ML-FeatureEngineering-4" element={<OutliersPart4 />} />
+
+        {/* Lineaer And Multiple Regression */}
+        <Route path="/blogs/ML-LinearAndMultipleRegression-1" element={<LinearAndMultipleRegression />} />
+
+        {/* Gradient Decent */}
+        <Route path="/blogs/ML-GradientDecent-1" element={<BatchAndStochoisticAndMiniBatch />} />
+
+        {/* Polynomial Regression */}
+        <Route path="/blogs/ML-PolynomialRegression-1" element={<PolynomialRegressionAndTradeOffs />} />
+        <Route path="/blogs/ML-PolynomialRegression-2" element={<OtherRegressions />} />
 
 
         {/* Computer Networks */}

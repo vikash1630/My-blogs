@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
-import Footer from "../../UI/Footer";
+import Footer from "../../../UI/Footer";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
