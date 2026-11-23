@@ -90,7 +90,6 @@
     "description": "Master caching and asynchronous system design: cache hits and misses, invalidation, TTL, cache stampede, request coalescing, timeouts, backpressure, fail-fast, queues, workers, acknowledgements, retries, idempotency, transactional outbox, dead letter queues, worker scaling, and system monitoring.",
     "image": "/SD5.png"
   },
-  
   {
     "id": "ML-Foundations-1",
     "order": 1,
@@ -194,8 +193,45 @@
     "category": "Machine Learning",
     "description": "Understand probability, conditional probability, independent and mutually exclusive events, Bayes theorem, prior and posterior probabilities, the Naive Bayes independence assumption, Laplace smoothing and Naive Bayes classifiers.",
     "image": "/ML13.png"
+  },
+  {
+    "id": "ML-KNN-SVM-1",
+    "order": 14,
+    "title": "KNN & SVM Part 1: Fundamentals & Geometric Intuition",
+    "category": "Machine Learning",
+    "description": "Learn K-Nearest Neighbors, distance metrics, choosing K, feature scaling and the curse of dimensionality. Understand SVM decision boundaries, hyperplanes, margins and support vectors.",
+    "image": "/ML14.png"
+  },
+  {
+    "id": "ML-SVM-Margins-1",
+    "order": 15,
+    "title": "SVM Part 2: Hard Margin & Soft Margin Classification",
+    "category": "Machine Learning",
+    "description": "Understand maximum-margin classification, hard-margin constraints, soft-margin SVM, slack variables, margin violations and how the C parameter controls the trade-off between margin width and classification errors.",
+    "image": "/ML15.png"
+  },
+  {
+    "id": "ML-SVM-Kernels-1",
+    "order": 16,
+    "title": "SVM Part 3: Kernel Trick, Polynomial & RBF Kernels",
+    "category": "Machine Learning",
+    "description": "Learn how the kernel trick enables SVM to classify nonlinear data using higher-dimensional feature spaces. Explore linear, polynomial and RBF kernels, gamma, C and practical Scikit-learn implementations.",
+    "image": "/ML16.png"
+  },
+  {
+    "id": "ML-DecisionTree-Classification-1",
+    "order": 17,
+    "title": "Decision Trees Part 1: Classification, Entropy & Information Gain",
+    "category": "Machine Learning",
+    "description": "Understand decision tree classification, tree splitting, Gini impurity, entropy, information gain, feature selection, pruning and tree visualization using Python.",
+    "image": "/ML17.png"
+  },
+  {
+    "id": "ML-DecisionTree-Regression-1",
+    "order": 18,
+    "title": "Decision Trees Part 2: Regression & Visualization",
+    "category": "Machine Learning",
+    "description": "Learn how decision trees predict continuous numerical values, how regression splits minimize prediction error, and how to visualize and interpret regression trees.",
+    "image": "/ML18.png"
   }
-
 ]
-
-

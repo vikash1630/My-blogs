@@ -40,6 +40,11 @@ import LogisticRegressionCore_10 from "./components/Blogs/MachineLearning/06_Log
 import ClassificationMetrics_11 from "./components/Blogs/MachineLearning/06_LogisticRegression/ClassificationMetrics_11";
 import AdvancedLogisticRegression_12 from "./components/Blogs/MachineLearning/06_LogisticRegression/AdvancedLogisticRegression_12";
 import BasicsAndBayesTheorem_13 from "./components/Blogs/MachineLearning/07_NaiveBayes/BasicsAndBayesTheorem_13";
+import KNNAndSVM_14 from "./components/Blogs/MachineLearning/08_KNN_SVM/KNNAndSVM_14";
+import SVMHardAndSoftMargins_15 from "./components/Blogs/MachineLearning/08_KNN_SVM/SVMHardAndSoftMargins_15";
+import SVMKernels_16 from "./components/Blogs/MachineLearning/08_KNN_SVM/SVMKernels_16";
+import DecisionTreeClassification_17 from "./components/Blogs/MachineLearning/DecisionTrees/DecisionTreeClassification_17";
+import DecisionTreeRegression_18 from "./components/Blogs/MachineLearning/DecisionTrees/DecisionTreeRegression_18";
 
 function App() {
   return (
@@ -85,8 +90,18 @@ function App() {
         <Route path="/blogs/ML-AdvancedLogisticRegression-1" element={<AdvancedLogisticRegression_12 />} />
 
         {/* Naive Bayes Theorem  */}
-
         <Route path="/blogs/ML-NaiveBayes-1" element={<BasicsAndBayesTheorem_13 />} />
+
+        {/* KNN and SVN  */}
+        <Route path="/blogs/ML-KNN-SVM-1" element={<KNNAndSVM_14 />} />
+        <Route path="/blogs/ML-SVM-Margins-1" element={<SVMHardAndSoftMargins_15 />} />
+        <Route path="/blogs/ML-SVM-Kernels-1" element={<SVMKernels_16 />} />
+
+        {/* Decision Trees  */}
+
+        <Route path="/blogs/ML-DecisionTree-Classification-1" element={<DecisionTreeClassification_17 />} />
+        <Route path="/blogs/ML-DecisionTree-Regression-1" element={<DecisionTreeRegression_18 />} />
+
 
         {/* Computer Networks */}
         <Route path="/blogs/CN-part-1" element={<Part1 />} />
