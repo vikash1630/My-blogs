@@ -162,7 +162,40 @@
     "category": "Machine Learning",
     "description": "Learn how Ridge (L2), Lasso (L1) and ElasticNet regularization penalize large coefficients to control overfitting, how alpha and l1_ratio work, and how to select them using cross-validation with practical Python code.",
     "image": "/ML9.png"
+  },
+  {
+    "id": "ML-LogisticRegression-1",
+    "order": 10,
+    "title": "Classification Part 1: Logistic Regression Fundamentals",
+    "category": "Machine Learning",
+    "description": "Understand logistic regression, sigmoid functions, probability estimation, decision boundaries, odds, log-odds, maximum likelihood and how logistic regression learns to classify data.",
+    "image": "/ML10.png"
+  },
+  {
+    "id": "ML-ClassificationMetrics-1",
+    "order": 11,
+    "title": "Classification Part 2: Evaluation Metrics, ROC & AUC",
+    "category": "Machine Learning",
+    "description": "Learn confusion matrices, accuracy, precision, recall, F1-score, classification thresholds, ROC curves and AUC. Understand how to evaluate classifiers and handle imbalanced datasets.",
+    "image": "/ML11.png"
+  },
+  {
+    "id": "ML-AdvancedLogisticRegression-1",
+    "order": 12,
+    "title": "Classification Part 3: Advanced Logistic Regression",
+    "category": "Machine Learning",
+    "description": "Explore Softmax regression, polynomial features for classification, regularization, C, l1_ratio, solvers, class weights, decision thresholds and logistic regression hyperparameter tuning.",
+    "image": "/ML12.png"
+  },
+  {
+    "id": "ML-NaiveBayes-1",
+    "order": 13,
+    "title": "Naive Bayes: Probability, Bayes Theorem & Classification",
+    "category": "Machine Learning",
+    "description": "Understand probability, conditional probability, independent and mutually exclusive events, Bayes theorem, prior and posterior probabilities, the Naive Bayes independence assumption, Laplace smoothing and Naive Bayes classifiers.",
+    "image": "/ML13.png"
   }
+
 ]
 
 

@@ -36,6 +36,10 @@ import BatchAndStochasticAndMiniBatch from "./components/Blogs/MachineLearning/0
 import LinearAndMultipleRegression from "./components/Blogs/MachineLearning/04_LinearRegression/LinearAndMultipleRegression_07";
 import PolynomialRegressionAndTradeOffs from "./components/Blogs/MachineLearning/05_PolynomialRegression/PolynomialRegressionAndTradeOffs_08";
 import OtherRegressions from "./components/Blogs/MachineLearning/05_PolynomialRegression/OtherRegressions_09";
+import LogisticRegressionCore_10 from "./components/Blogs/MachineLearning/06_LogisticRegression/LogisticRegressionCore_10";
+import ClassificationMetrics_11 from "./components/Blogs/MachineLearning/06_LogisticRegression/ClassificationMetrics_11";
+import AdvancedLogisticRegression_12 from "./components/Blogs/MachineLearning/06_LogisticRegression/AdvancedLogisticRegression_12";
+import BasicsAndBayesTheorem_13 from "./components/Blogs/MachineLearning/07_NaiveBayes/BasicsAndBayesTheorem_13";
 
 function App() {
   return (
@@ -74,6 +78,15 @@ function App() {
 
         {/* Regularization */}
         <Route path="/blogs/ML-Regularization-1" element={<OtherRegressions />} />
+
+        {/* Logistic Regresion  */}
+        <Route path="/blogs/ML-LogisticRegression-1" element={<LogisticRegressionCore_10 />} />
+        <Route path="/blogs/ML-ClassificationMetrics-1" element={<ClassificationMetrics_11 />} />
+        <Route path="/blogs/ML-AdvancedLogisticRegression-1" element={<AdvancedLogisticRegression_12 />} />
+
+        {/* Naive Bayes Theorem  */}
+
+        <Route path="/blogs/ML-NaiveBayes-1" element={<BasicsAndBayesTheorem_13 />} />
 
         {/* Computer Networks */}
         <Route path="/blogs/CN-part-1" element={<Part1 />} />
