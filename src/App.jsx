@@ -43,8 +43,11 @@ import BasicsAndBayesTheorem_13 from "./components/Blogs/MachineLearning/07_Naiv
 import KNNAndSVM_14 from "./components/Blogs/MachineLearning/08_KNN_SVM/KNNAndSVM_14";
 import SVMHardAndSoftMargins_15 from "./components/Blogs/MachineLearning/08_KNN_SVM/SVMHardAndSoftMargins_15";
 import SVMKernels_16 from "./components/Blogs/MachineLearning/08_KNN_SVM/SVMKernels_16";
-import DecisionTreeClassification_17 from "./components/Blogs/MachineLearning/DecisionTrees/DecisionTreeClassification_17";
-import DecisionTreeRegression_18 from "./components/Blogs/MachineLearning/DecisionTrees/DecisionTreeRegression_18";
+import DecisionTreeClassification_17 from "./components/Blogs/MachineLearning/09_DecisionTrees/DecisionTreeClassification_17";
+import DecisionTreeRegression_18 from "./components/Blogs/MachineLearning/09_DecisionTrees/DecisionTreeRegression_18";
+import EnsembleLearningBasics_19 from "./components/Blogs/MachineLearning/10_EnsembleLearning/EnsembleLearningBasics_19";
+import BaggingConcepts_20 from "./components/Blogs/MachineLearning/10_EnsembleLearning/BaggingConcepts_20";
+import RandomForests_21 from "./components/Blogs/MachineLearning/10_EnsembleLearning/RandomForests_21";
 
 function App() {
   return (
@@ -98,10 +101,13 @@ function App() {
         <Route path="/blogs/ML-SVM-Kernels-1" element={<SVMKernels_16 />} />
 
         {/* Decision Trees  */}
-
         <Route path="/blogs/ML-DecisionTree-Classification-1" element={<DecisionTreeClassification_17 />} />
         <Route path="/blogs/ML-DecisionTree-Regression-1" element={<DecisionTreeRegression_18 />} />
 
+        {/* Ensemble Learning  */}
+        <Route path="/blogs/ML-EnsembleLearning-1" element={<EnsembleLearningBasics_19 />} />
+        <Route path="/blogs/ML-Bagging-1" element={<BaggingConcepts_20 />} />
+        <Route path="/blogs/ML-RandomForest-1" element={<RandomForests_21 />} />
 
         {/* Computer Networks */}
         <Route path="/blogs/CN-part-1" element={<Part1 />} />

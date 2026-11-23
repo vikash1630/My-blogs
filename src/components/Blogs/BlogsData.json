@@ -233,5 +233,29 @@
     "category": "Machine Learning",
     "description": "Learn how decision trees predict continuous numerical values, how regression splits minimize prediction error, and how to visualize and interpret regression trees.",
     "image": "/ML18.png"
+  },
+  {
+    "id": "ML-EnsembleLearning-1",
+    "order": 19,
+    "title": "Ensemble Learning Part 1: Voting, Bagging, Boosting & Stacking",
+    "category": "Machine Learning",
+    "description": "Understand ensemble learning, base learners, model diversity and the bias-variance connection. Explore hard voting, soft voting, weighted voting, bagging, boosting and stacking.",
+    "image": "/ML19.png"
+  },
+  {
+    "id": "ML-Bagging-1",
+    "order": 20,
+    "title": "Ensemble Learning Part 2: Bagging, Bootstrap & OOB Score",
+    "category": "Machine Learning",
+    "description": "Learn bootstrap sampling, bagging classifiers and regressors, pasting, random subspaces, random patches, out-of-bag evaluation and hyperparameter tuning using GridSearchCV.",
+    "image": "/ML20.png"
+  },
+  {
+    "id": "ML-RandomForest-1",
+    "order": 21,
+    "title": "Ensemble Learning Part 3: Random Forest & Feature Importance",
+    "category": "Machine Learning",
+    "description": "Understand Random Forest as bagging with random feature selection. Explore tree construction, variance reduction, hyperparameters, OOB evaluation, GridSearchCV, RandomizedSearchCV, impurity-based feature importance and permutation importance.",
+    "image": "/ML21.png"
   }
 ]
