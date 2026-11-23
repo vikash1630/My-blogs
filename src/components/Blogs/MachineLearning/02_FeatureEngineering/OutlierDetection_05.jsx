@@ -466,7 +466,7 @@ function Concept({ concept, accent }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function OutliersPart4() {
+function OutlierDetection_05() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -607,4 +607,4 @@ function OutliersPart4() {
   );
 }
 
-export default OutliersPart4;
+export default OutlierDetection_05;

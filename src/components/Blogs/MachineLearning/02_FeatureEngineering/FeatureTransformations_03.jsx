@@ -522,7 +522,7 @@ function Concept({ concept, accent }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function TransformersPart2() {
+function FeatureTransformations_03() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -663,4 +663,4 @@ function TransformersPart2() {
   );
 }
 
-export default TransformersPart2;
+export default FeatureTransformations_03;

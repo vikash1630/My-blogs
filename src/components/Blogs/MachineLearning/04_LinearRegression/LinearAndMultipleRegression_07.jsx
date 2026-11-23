@@ -345,7 +345,7 @@ function Block({ block }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function LinearAndMultipleRegression() {
+function LinearAndMultipleRegression_07() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -478,4 +478,4 @@ function LinearAndMultipleRegression() {
   );
 }
 
-export default LinearAndMultipleRegression;
+export default LinearAndMultipleRegression_07;

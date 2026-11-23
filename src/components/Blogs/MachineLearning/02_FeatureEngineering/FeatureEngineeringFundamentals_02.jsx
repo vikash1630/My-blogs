@@ -660,7 +660,7 @@ function Concept({ concept, accent }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-const BasicsToPipelinesPart1 = () => {
+const FeatureEngineeringFundamentals_02 = () => {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -801,4 +801,4 @@ const BasicsToPipelinesPart1 = () => {
   );
 };
 
-export default BasicsToPipelinesPart1;
+export default FeatureEngineeringFundamentals_02;

@@ -674,7 +674,7 @@ function Concept({ concept, accent }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-const MissingValuesPart3 = () => {
+const MissingDataImputation_04 = () => {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -815,4 +815,4 @@ const MissingValuesPart3 = () => {
   );
 };
 
-export default MissingValuesPart3;
+export default MissingDataImputation_04;

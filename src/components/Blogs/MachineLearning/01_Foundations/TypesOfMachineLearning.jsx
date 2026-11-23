@@ -12,11 +12,12 @@ import Footer from "../../../UI/Footer";
 const FONT_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap');
 
-.gd-page  { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -webkit-text-size-adjust: 100%; }
+.gd-page  { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
 .gd-serif { font-family: 'Newsreader', Georgia, 'Times New Roman', serif; font-optical-sizing: auto; }
 .gd-mono  { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-ligatures: none; }
 .gd-noscrollbar { scrollbar-width: none; }
 .gd-noscrollbar::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 `;
 
 /* ------------------------------------------------------------------ */
@@ -25,194 +26,187 @@ const FONT_CSS = `
 
 const CONCEPTS = [
   {
-    id: "ridge-regression",
-    name: "Ridge Regression",
+    id: "types-of-ml",
+    name: "Types of Machine Learning",
     blocks: [
       {
         type: "text",
-        text: "Ridge Regression is Linear Regression with one extra rule. Big coefficients (b1, b2 ...) are punished. The model must keep the error small AND keep the coefficients small.",
+        text: "Machine Learning types are decided by one question: does the data have the answer column?",
+      },
+      {
+        type: "terms",
+        items: [
+          { term: "Answers are there", desc: "Supervised learning" },
+          { term: "No answers", desc: "Unsupervised learning" },
+        ],
       },
       {
         type: "text",
         title: "Why",
-        text: "When a model overfits, its coefficients become very big. The model is overreacting to small changes in the data. Ridge keeps the coefficients small, so the model stays calm and does not memorize noise.",
-      },
-      {
-        type: "points",
-        title: "Real life (needed to understand)",
-        points: [
-          'A teacher says: "Short and simple answers get full marks. Long and complicated answers lose marks."',
-          "The student must still answer correctly, but he is pushed to keep the answer simple.",
-          "Ridge does the same with the model. It must fit the data, but it is pushed to stay simple.",
-        ],
-      },
-      {
-        type: "formula",
-        title: "Formula",
-        lines: [{ f: "Loss = Σ (y − ŷ)² + α · Σ bⱼ²" }],
-        points: [
-          "First part = normal error (same as Linear Regression).",
-          "Second part = penalty = sum of squares of all coefficients (b0 intercept is NOT included).",
-          "α (alpha) = how strong the punishment is. We choose it.",
-        ],
-      },
-      {
-        type: "formula",
-        lines: [{ l: "Normal equation", f: "B = (XᵀX + αI)⁻¹ Xᵀy", n: "Linear Regression has no αI" }],
-      },
-      {
-        type: "points",
-        title: "How alpha works",
-        points: [
-          "α = 0 = no punishment, same as Linear Regression.",
-          "small α = light punishment, coefficients shrink a little.",
-          "large α = strong punishment, coefficients become very small, model becomes too simple (underfitting).",
-          "Alpha controls the bias-variance trade-off: bigger alpha = more bias, less variance.",
-        ],
-      },
-      {
-        type: "points",
-        title: "Important points",
-        points: [
-          "Ridge is also called L2 regularization (penalty uses squares, power 2).",
-          "Ridge makes coefficients small, but NEVER exactly zero. (Lasso can make them exactly zero.)",
-          "Always scale the columns first (`StandardScaler`). The penalty is the same for all coefficients, so if the columns have different scales, the punishment is unfair.",
-          "It helps with multicollinearity. αI makes the matrix safe to invert, so the coefficients become stable.",
-          "Use it when the model overfits, and you want to keep ALL the columns.",
-          "Good for: many related columns, high degree polynomial, many columns but few rows.",
-          "Choose alpha using cross-validation (`RidgeCV`).",
-          "Alpha too small = still overfitting. Alpha too big = underfitting. Look for the middle.",
-          "Same rule: fit only on train data, otherwise it is DATA LEAKAGE.",
-        ],
-      },
-      {
-        type: "code",
-        code: `from sklearn.linear_model import Ridge, RidgeCV
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
-
-# Ridge with one alpha
-ridge = make_pipeline(StandardScaler(), Ridge(alpha=10))
-ridge.fit(X_train, y_train)                     # learns from train only
-ridge.score(X_test, y_test)                     # R2 on test data
-
-ridge[-1].coef_                                 # coefficients (small, but not zero)
-
-# Let sklearn choose the best alpha using cross-validation
-model = make_pipeline(StandardScaler(), RidgeCV(alphas=[0.001, 0.1, 1, 10, 100, 1000]))
-model.fit(X_train, y_train)
-model[-1].alpha_                                # best alpha found`,
+        text: "Every ML project starts with this choice. It decides which algorithms we can use and how we check the result.",
       },
     ],
   },
   {
-    id: "lasso-regression",
-    name: "Lasso Regression",
+    id: "supervised",
+    name: "Supervised Learning",
     blocks: [
       {
         type: "text",
-        text: "Lasso is like Ridge, but it punishes the absolute values of the coefficients, not the squares. It can push coefficients to exactly ZERO, so it removes useless columns. This is called automatic feature selection.",
+        text: "The data has inputs (X) AND correct answers (y). The model learns from examples that already have answers, then predicts the answer for new data.",
       },
       {
         type: "text",
-        title: "Why",
-        text: "Ridge makes coefficients small, but keeps all columns. When many columns are useless, we want to remove them. Lasso does this.",
+        title: "Think of it like this",
+        text: "A student with a teacher. The teacher gives questions with the answer key. The student practices, then takes the real exam.",
       },
       {
-        type: "formula",
-        title: "Formula",
-        lines: [{ f: "Loss = Σ (y − ŷ)² + α · Σ |bⱼ|" }],
-        points: ["α = how strong the punishment is (same as Ridge)."],
-      },
-      {
-        type: "points",
-        title: "Important points",
-        points: [
-          "Lasso is also called L1 regularization. (Ridge = L2)",
-          "Ridge shrinks coefficients. Lasso shrinks AND removes them.",
-          "Coefficient = 0 means that column is removed from the model.",
-          "Bigger alpha = more coefficients become zero. Too big = model becomes too simple.",
-          "If two columns are very similar, Lasso keeps one and drops the other. Ridge keeps both.",
-          "Scale the columns first (`StandardScaler`).",
-          "Choose alpha using cross-validation (`LassoCV`).",
-          "Use it when: many columns, most are useless, or you want to know which columns really matter.",
+        type: "terms",
+        title: "Two kinds",
+        items: [
+          { term: "Regression", desc: "predicts a NUMBER (house price, salary, total bill)." },
+          { term: "Classification", desc: "predicts a CLASS (spam or not, leave or stay, contract type)." },
         ],
       },
       {
-        type: "code",
-        code: `from sklearn.linear_model import Lasso, LassoCV
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
-
-model = make_pipeline(StandardScaler(), Lasso(alpha=10))
-model.fit(X_train, y_train)                     # learns from train only
-model[-1].coef_                                 # zero = column removed
-
-# Let sklearn choose the best alpha
-model = make_pipeline(StandardScaler(), LassoCV(cv=5))
-model.fit(X_train, y_train)
-model[-1].alpha_                                # best alpha found`,
+        type: "points",
+        title: "Examples",
+        points: ["Linear Regression, Logistic Regression, Naive Bayes, KNN, SVM, Trees."],
       },
     ],
   },
   {
-    id: "elasticnet-regression",
-    name: "ElasticNet Regression",
+    id: "unsupervised",
+    name: "Unsupervised Learning",
     blocks: [
       {
         type: "text",
-        text: "ElasticNet uses BOTH penalties at the same time: the Ridge penalty (squares) and the Lasso penalty (absolute values).",
+        text: "The data has ONLY inputs. There is no answer column. The model finds patterns by itself.",
       },
       {
         type: "text",
-        title: "Why",
-        text: "Lasso removes useless columns, but it can drop one of two similar columns by chance. Ridge keeps all columns, but it never removes any. ElasticNet does both jobs: it removes useless columns and stays stable with related columns.",
+        title: "Think of it like this",
+        text: "A pile of mixed toys. Nobody tells you the groups. You sort them yourself: cars, dolls, blocks.",
       },
       {
-        type: "formula",
-        title: "Formula",
-        lines: [{ f: "Loss = Σ (y − ŷ)² + α · [ r · Σ|bⱼ| + (1 − r) · Σ bⱼ² ]" }],
-        points: [
-          "α = how strong the total punishment is.",
-          "r = `l1_ratio` = how much Lasso vs Ridge.",
+        type: "terms",
+        title: "Main kinds",
+        items: [
+          { term: "Clustering", desc: "puts similar rows into groups (customer groups, K-Means)." },
+          { term: "Dimensionality reduction", desc: "keeps fewer columns, loses little information (PCA)." },
+          { term: "Association rules", desc: 'finds things that go together ("bread and butter").' },
+          { term: "Anomaly detection", desc: "finds rows that look strange (fraud, machine faults)." },
         ],
       },
+    ],
+  },
+  {
+    id: "semi-and-reinforcement",
+    name: "Two More Types",
+    blocks: [
       {
-        type: "points",
-        title: "How l1_ratio works",
-        points: [
-          "`l1_ratio` = 1 = pure Lasso.",
-          "`l1_ratio` = 0 = pure Ridge.",
-          "`l1_ratio` = 0.5 = half Lasso, half Ridge.",
+        type: "terms",
+        items: [
+          {
+            term: "Semi-supervised",
+            desc: "a few rows have answers, most do not. Labeling is costly, so the few answers help with the many. Example: 100 labeled photos and 100,000 unlabeled photos.",
+          },
+          {
+            term: "Reinforcement",
+            desc: "the model tries things and gets rewards or penalties, like training a dog with treats. Examples: game programs, robots learning to walk.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "real-life",
+    name: "Real Life Example",
+    blocks: [
+      {
+        type: "text",
+        text: "A phone company has customers with monthly calls and data used.",
+      },
+      {
+        type: "compare",
+        items: [
+          {
+            title: "Supervised",
+            text: "We also know who bought the premium plan. Train a model to predict who will buy premium next.",
+          },
+          {
+            title: "Unsupervised",
+            text: "No answer column. Ask the model for natural groups. It may find heavy users and light users. The business decides what to do with each group.",
+          },
         ],
       },
       {
         type: "points",
         title: "Important points",
         points: [
-          "Two settings to choose: alpha and `l1_ratio`.",
-          "Can make coefficients exactly zero (like Lasso), because it has the Lasso part.",
-          "When two columns are very similar, it keeps both together (like Ridge). Lasso would drop one.",
-          "Use it when: many columns, many of them related to each other.",
-          "Scale the columns first (`StandardScaler`).",
-          "Choose both settings using cross-validation (`ElasticNetCV`).",
+          "Only difference when training: supervised uses `fit(X, y)`. Unsupervised uses `fit(X)`.",
+          "Unsupervised groups have no names. WE give them meaning. The group numbers (0, 1) are only names and can swap between runs.",
+          "Gradient Descent is NOT a type of learning. It is a method to find the best weights.",
+          "Where we saw them: Groups 1 to 13 are supervised. Group 14 (Clustering) is unsupervised. PCA is also unsupervised.",
         ],
       },
       {
         type: "code",
-        code: `from sklearn.linear_model import ElasticNet, ElasticNetCV
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
+        code: `from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
 
-model = make_pipeline(StandardScaler(), ElasticNet(alpha=10, l1_ratio=0.5))
-model.fit(X_train, y_train)                     # learns from train only
-model[-1].coef_                                 # some may be exactly zero
+# Supervised: we give X AND y (the answers)
+model = LinearRegression()
+model.fit(X, y)
 
-# Let sklearn choose alpha and l1_ratio
-model = make_pipeline(StandardScaler(), ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9, 1], cv=5))
-model.fit(X_train, y_train)
-model[-1].alpha_                                # best alpha
-model[-1].l1_ratio_                             # best l1_ratio`,
+# Unsupervised: we give only X (no answers)
+km = KMeans(n_clusters=2)
+km.fit(X)
+print(km.labels_)    # group numbers 0, 1 (only names, can swap between runs)`,
+      },
+    ],
+  },
+  {
+    id: "industry-standard",
+    name: "Industry Standard",
+    blocks: [
+      {
+        type: "points",
+        points: [
+          "Most business ML is supervised (clear predictions: will leave, will pay, price). The costly part is getting good labels.",
+          "Unsupervised is used to explore data, make customer segments, find odd rows (fraud), and cut columns with PCA before a supervised model.",
+          "They are often combined: cluster first, then use the cluster number as a new column in a supervised model.",
+          {
+            text: "Checking quality is different.",
+            sub: [
+              "Supervised has clear scores on test data (accuracy, F1, RMSE).",
+              'Unsupervised has no single right answer, so teams use silhouette score and the question "do these groups make business sense?"',
+            ],
+          },
+          "Big language models first learn from huge unlabeled data (self-supervised learning), then are fine-tuned with labeled data.",
+          "If labels are wrong or biased, a supervised model learns the same mistakes. Always check labels.",
+          "Start simple. Build a supervised baseline when you have labels. Use unsupervised when you have no labels, or when you want to understand the data.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "remember-and-practice",
+    name: "Remember and Practice",
+    blocks: [
+      {
+        type: "callout",
+        title: "One line to remember",
+        text: "Supervised = learn from examples with answers. Unsupervised = find patterns with no answers.",
+      },
+      {
+        type: "points",
+        title: "Practice",
+        intro: "Take any small table you know. Decide: does it have an answer column?",
+        points: [
+          "If yes, say if the answer is a number or a class (regression or classification).",
+          "If no, say what groups you would look for (clustering).",
+        ],
       },
     ],
   },
@@ -301,47 +295,90 @@ function Label({ children }) {
 function Points({ points }) {
   return (
     <ul className="space-y-3.5">
-      {points.map((p, i) => (
-        <li
-          key={i}
-          className="flex gap-3 sm:gap-3.5 text-[16px] sm:text-[17px] leading-[1.7] sm:leading-[1.75] text-stone-700 dark:text-stone-300"
-        >
-          <span
-            className="mt-[0.85em] h-1 w-3 flex-shrink-0 rounded-full bg-teal-700 dark:bg-teal-400"
-            aria-hidden="true"
-          />
-          <span className="min-w-0 flex-1 break-words">
-            <Inline text={p} />
-          </span>
-        </li>
-      ))}
+      {points.map((p, i) => {
+        const text = typeof p === "string" ? p : p.text;
+        const sub = typeof p === "string" ? null : p.sub;
+        return (
+          <li key={i} className="flex gap-3 sm:gap-3.5 text-[16px] sm:text-[17px] leading-[1.7] sm:leading-[1.75] text-stone-700 dark:text-stone-300">
+            <span
+              className="mt-[0.85em] h-1 w-3 flex-shrink-0 rounded-full bg-teal-700 dark:bg-teal-400"
+              aria-hidden="true"
+            />
+            <div className="min-w-0 flex-1 break-words">
+              <Inline text={text} />
+              {sub && (
+                <ul className="mt-2.5 space-y-2">
+                  {sub.map((s, j) => (
+                    <li key={j} className="flex gap-3 text-stone-600 dark:text-stone-400">
+                      <span
+                        className="mt-[0.8em] h-1 w-1 flex-shrink-0 rounded-full bg-stone-400 dark:bg-stone-500"
+                        aria-hidden="true"
+                      />
+                      <span className="min-w-0 break-words">
+                        <Inline text={s} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 }
 
-// Formula panel: serif italic, like a textbook equation. Wraps on small screens.
-function Formula({ title, lines, points }) {
+// Term + description rows: stacked on phones, side by side on larger screens
+function Terms({ title, items }) {
   return (
     <div>
       {title && <Label>{title}</Label>}
-      <div className="rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-white/[0.03] px-4 sm:px-5 py-4 space-y-4">
-        {lines.map((line, i) => (
-          <div key={i}>
-            {line.l && (
-              <div className="text-[13px] sm:text-sm font-medium text-stone-500 dark:text-stone-400">{line.l}</div>
-            )}
-            <div className="gd-serif break-words text-[19px] sm:text-2xl italic leading-8 sm:leading-9 text-stone-900 dark:text-stone-100">
-              {line.f}
-            </div>
-            {line.n && <div className="text-sm leading-6 text-stone-500 dark:text-stone-400">{line.n}</div>}
+      <dl className="divide-y divide-stone-200 dark:divide-white/10 rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-white/[0.03]">
+        {items.map((it, i) => (
+          <div key={i} className="px-4 sm:px-5 py-4 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-6">
+            <dt className="gd-serif text-[19px] sm:text-xl font-medium leading-snug text-stone-900 dark:text-stone-100">
+              {it.term}
+            </dt>
+            <dd className="mt-1.5 sm:mt-0 min-w-0 break-words text-[16px] sm:text-[17px] leading-[1.7] text-stone-700 dark:text-stone-300">
+              <Inline text={it.desc} />
+            </dd>
           </div>
         ))}
-      </div>
-      {points && (
-        <div className="mt-5">
-          <Points points={points} />
+      </dl>
+    </div>
+  );
+}
+
+// Side by side comparison: stacked on phones
+function Compare({ items }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {items.map((it, i) => (
+        <div
+          key={i}
+          className="rounded-lg border border-stone-200 dark:border-white/10 bg-white dark:bg-white/[0.03] px-4 sm:px-5 py-4 sm:py-5"
+        >
+          <div className="gd-serif mb-2 text-[21px] sm:text-2xl font-medium text-teal-800 dark:text-teal-300">
+            {it.title}
+          </div>
+          <p className="break-words text-[16px] sm:text-[17px] leading-[1.7] text-stone-700 dark:text-stone-300">
+            <Inline text={it.text} />
+          </p>
         </div>
-      )}
+      ))}
+    </div>
+  );
+}
+
+// The one thing to remember
+function Callout({ title, text }) {
+  return (
+    <div className="rounded-lg border-l-4 border-teal-700 dark:border-teal-400 bg-teal-50 dark:bg-teal-400/10 px-4 sm:px-6 py-5">
+      {title && <Label>{title}</Label>}
+      <p className="gd-serif break-words text-[21px] sm:text-2xl italic leading-[1.5] text-stone-900 dark:text-stone-100">
+        {text}
+      </p>
     </div>
   );
 }
@@ -363,12 +400,21 @@ function Block({ block }) {
           </p>
         </div>
       );
-    case "formula":
-      return <Formula title={block.title} lines={block.lines} points={block.points} />;
+    case "terms":
+      return <Terms title={block.title} items={block.items} />;
+    case "compare":
+      return <Compare items={block.items} />;
+    case "callout":
+      return <Callout title={block.title} text={block.text} />;
     case "points":
       return (
         <div>
           {block.title && <Label>{block.title}</Label>}
+          {block.intro && (
+            <p className="mb-3.5 text-[16px] sm:text-[17px] leading-[1.7] text-stone-800 dark:text-stone-200">
+              {block.intro}
+            </p>
+          )}
           <Points points={block.points} />
         </div>
       );
@@ -388,7 +434,7 @@ function Block({ block }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function OtherRegressions() {
+function TypesOfMachineLearning() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -464,7 +510,7 @@ function OtherRegressions() {
               </Link>
 
               <h1 className="gd-serif text-[2rem] sm:text-6xl font-medium tracking-[-0.02em] leading-[1.1] sm:leading-[1.05] text-stone-900 dark:text-white">
-                Ridge, Lasso and ElasticNet Regression
+                Types of Machine Learning
               </h1>
             </div>
 
@@ -526,4 +572,4 @@ function OtherRegressions() {
   );
 }
 
-export default OtherRegressions;
+export default TypesOfMachineLearning;

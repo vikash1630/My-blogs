@@ -3,9 +3,19 @@ import { ArrowLeft } from "lucide-react";
 import Footer from "../UI/Footer";
 import BlogsData from "./BlogsData.json";
 
+// Blogs with an `order` come first (1, 2, 3 ...). Blogs without one keep their JSON order after them.
+const byOrder = (a, b) => {
+  const hasA = a.order != null;
+  const hasB = b.order != null;
+  if (hasA && hasB) return a.order - b.order;
+  if (hasA) return -1;
+  if (hasB) return 1;
+  return 0;
+};
+
 const CategoryPage = () => {
   const { category } = useParams();
-  const blogs = BlogsData.filter((b) => b.category === category);
+  const blogs = BlogsData.filter((b) => b.category === category).sort(byOrder);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -31,12 +41,22 @@ const CategoryPage = () => {
                 to={`/blogs/${blog.id}`}
                 className="flex flex-col rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-gray-900/40 overflow-hidden transition-all duration-300 hover:scale-[1.02]"
               >
-                <div className="w-full aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <div className="relative w-full aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
                   <img
                     src={blog.image}
                     alt={blog.title}
                     className="w-full h-full object-cover"
                   />
+
+                  {/* order badge: only shown when the blog has an order */}
+                  {blog.order != null && (
+                    <span
+                      className="absolute top-3 left-3 rounded-full bg-gray-900/85 dark:bg-white/90 px-3 py-1 text-xs font-semibold text-white dark:text-gray-900 shadow-sm backdrop-blur"
+                      aria-label={`Part ${blog.order}`}
+                    >
+                      Part {blog.order}
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-col gap-3 p-5 flex-1">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">

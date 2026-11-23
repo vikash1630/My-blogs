@@ -388,7 +388,7 @@ function Block({ block }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function PolynomialRegressionAndTradeOffs() {
+function PolynomialRegressionAndTradeOffs_08() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -526,4 +526,4 @@ function PolynomialRegressionAndTradeOffs() {
   );
 }
 
-export default PolynomialRegressionAndTradeOffs;
+export default PolynomialRegressionAndTradeOffs_08;

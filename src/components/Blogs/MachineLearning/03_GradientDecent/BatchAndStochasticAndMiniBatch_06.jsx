@@ -392,7 +392,7 @@ function Block({ block }) {
 /*  PAGE                                                               */
 /* ------------------------------------------------------------------ */
 
-function BatchAndStochoisticAndMiniBatch() {
+function BatchAndStochasticAndMiniBatch_06() {
   const [progress, setProgress] = useState(0);
   const [showTopArrow, setShowTopArrow] = useState(false);
   const [showBottomArrow, setShowBottomArrow] = useState(false);
@@ -527,4 +527,4 @@ function BatchAndStochoisticAndMiniBatch() {
   );
 }
 
-export default BatchAndStochoisticAndMiniBatch;
+export default BatchAndStochasticAndMiniBatch_06;

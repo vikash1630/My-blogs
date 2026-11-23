@@ -25,14 +25,17 @@ import SystemDesign3 from "./components/Blogs/SystemDesign/SystemDesign3";
 import ScrollToTop from "./components/UI/ScrollToTop";
 import SystemDesign4 from "./components/Blogs/SystemDesign/SystemDesign4";
 import SystemDesign5 from "./components/Blogs/SystemDesign/SystemDesign5";
-import BasicsToPipelinesPart1 from "./components/Blogs/MachineLearning/FeatureEngineering/BasicsToPipelinesPart1";
-import TransformersPart2 from "./components/Blogs/MachineLearning/FeatureEngineering/TransformersPart2";
-import MissingValuesPart3 from "./components/Blogs/MachineLearning/FeatureEngineering/MissingValuesPart3";
-import OutliersPart4 from "./components/Blogs/MachineLearning/FeatureEngineering/OutliersPart4";
-import LinearAndMultipleRegression from "./components/Blogs/MachineLearning/LinearRegression/LinearAndMultipleRegression";
-import BatchAndStochoisticAndMiniBatch from "./components/Blogs/MachineLearning/GradientDecent/BatchAndStochoisticAndMiniBatch";
-import PolynomialRegressionAndTradeOffs from "./components/Blogs/MachineLearning/PolynomialRegression/PolynomialRegressionAndTradeOffs";
-import OtherRegressions from "./components/Blogs/MachineLearning/PolynomialRegression/OtherRegressions";
+
+// Machine Learning
+import TypesOfMachineLearning from "./components/Blogs/MachineLearning/01_Foundations/TypesOfMachineLearning";
+import FeatureEngineeringFundamentals from "./components/Blogs/MachineLearning/02_FeatureEngineering/FeatureEngineeringFundamentals_02";
+import FeatureTransformations from "./components/Blogs/MachineLearning/02_FeatureEngineering/FeatureTransformations_03";
+import MissingDataImputation from "./components/Blogs/MachineLearning/02_FeatureEngineering/MissingDataImputation_04";
+import OutlierDetection from "./components/Blogs/MachineLearning/02_FeatureEngineering/OutlierDetection_05";
+import BatchAndStochasticAndMiniBatch from "./components/Blogs/MachineLearning/03_GradientDecent/BatchAndStochasticAndMiniBatch_06";
+import LinearAndMultipleRegression from "./components/Blogs/MachineLearning/04_LinearRegression/LinearAndMultipleRegression_07";
+import PolynomialRegressionAndTradeOffs from "./components/Blogs/MachineLearning/05_PolynomialRegression/PolynomialRegressionAndTradeOffs_08";
+import OtherRegressions from "./components/Blogs/MachineLearning/05_PolynomialRegression/OtherRegressions_09";
 
 function App() {
   return (
@@ -51,22 +54,26 @@ function App() {
         <Route path="/blogs/dsa-cheatsheet" element={<DsaCheatSheet />} />
 
         {/* Machine Learning */}
+        {/* Foundations */}
+        <Route path="/blogs/ML-Foundations-1" element={<TypesOfMachineLearning />} />
+
         {/* Feature Engineering */}
-        <Route path="/blogs/ML-FeatureEngineering-1" element={<BasicsToPipelinesPart1 />} />
-        <Route path="/blogs/ML-FeatureEngineering-2" element={<TransformersPart2 />} />
-        <Route path="/blogs/ML-FeatureEngineering-3" element={<MissingValuesPart3 />} />
-        <Route path="/blogs/ML-FeatureEngineering-4" element={<OutliersPart4 />} />
+        <Route path="/blogs/ML-FeatureEngineering-1" element={<FeatureEngineeringFundamentals />} />
+        <Route path="/blogs/ML-FeatureEngineering-2" element={<FeatureTransformations />} />
+        <Route path="/blogs/ML-FeatureEngineering-3" element={<MissingDataImputation />} />
+        <Route path="/blogs/ML-FeatureEngineering-4" element={<OutlierDetection />} />
 
-        {/* Lineaer And Multiple Regression */}
+        {/* Gradient Descent */}
+        <Route path="/blogs/ML-GradientDescent-1" element={<BatchAndStochasticAndMiniBatch />} />
+
+        {/* Linear Regression */}
         <Route path="/blogs/ML-LinearAndMultipleRegression-1" element={<LinearAndMultipleRegression />} />
-
-        {/* Gradient Decent */}
-        <Route path="/blogs/ML-GradientDecent-1" element={<BatchAndStochoisticAndMiniBatch />} />
 
         {/* Polynomial Regression */}
         <Route path="/blogs/ML-PolynomialRegression-1" element={<PolynomialRegressionAndTradeOffs />} />
-        <Route path="/blogs/ML-PolynomialRegression-2" element={<OtherRegressions />} />
 
+        {/* Regularization */}
+        <Route path="/blogs/ML-Regularization-1" element={<OtherRegressions />} />
 
         {/* Computer Networks */}
         <Route path="/blogs/CN-part-1" element={<Part1 />} />
